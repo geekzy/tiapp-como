@@ -1,0 +1,8 @@
+tmp
+*.class
+*.pyc
+*.pyo
+.project
+.fastdev.lock
+build/
+build.log
