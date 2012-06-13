@@ -13,13 +13,13 @@
             height: '44dp',
             width: '200dp',
             title: 'Click Me!',
-            top: '20dp'
+            top: '20dp',
+            abc: 'xyz'
         }, AppsCo.App.ui.buttons.test));
 
-    // listen to click event        
-    btn.addEventListener('click', function() {
-        AppsCo.App.act.call(this, 'Try/doSave');
-    });
+    // listen to click event            
+    btn.click('Try/doSave', btn.getHeight());
+    
     // add button into window
     win.add(btn);
     // open the window

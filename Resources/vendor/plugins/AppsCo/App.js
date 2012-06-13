@@ -101,3 +101,23 @@ AppsCo.App = function() {
         act: act        
     };
 }();
+
+(function() {
+    // common apply function for events
+    var applyFn, clickFn;
+    
+    applyFn = function(e) {
+        [].push.apply(args, [e]);        
+        AppsCo.App.act.apply(this, args);
+    };
+    
+    clickFn = function() {
+        var args = arguments;
+        this.addEventListener('click', applyFn);
+    };
+    
+    // Extend existing Ti Objects : Button.click    
+    Ti.UI.Button.prototype.click = clickFn;
+    // Extend existing Ti Objects : Button.swipe    
+    Ti.UI.Button.prototype.tap = clickFn; 
+}());
