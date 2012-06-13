@@ -11,5 +11,8 @@ Ti.include('/vendor/plugins/Underscore/install.js');
 // include global namespace and functionality
 Ti.include('/vendor/plugins/AppsCo/install.js');
 
+// include modules
+Ti.include('/app/modules/install.js');
+
 // include main script
 Ti.include('/app/main.js');

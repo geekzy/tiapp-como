@@ -13,14 +13,12 @@
             height: '44dp',
             width: '200dp',
             title: 'Click Me!',
-            top: '20dp'            
+            top: '20dp'
         }, AppsCo.App.ui.buttons.test));
 
     // listen to click event        
     btn.addEventListener('click', function() {
-        AppsCo.App.notty('OS['+ AppsCo.App.osname +'] Version['+ AppsCo.App.version +']');
-        AppsCo.App.notty('Width['+ AppsCo.App.width +'] Height['+ AppsCo.App.height +']');
-        AppsCo.App.notty((AppsCo.App.isTablet ? 'A' : 'NOT a') + ' Tablet');
+        AppsCo.App.act.call(this, 'Try/doSave');
     });
     // add button into window
     win.add(btn);

@@ -1,5 +1,7 @@
 // set global namespace
-var AppsCo = {}; 
+var AppsCo = {};
+// set controller root object
+AppsCo.Controller = {}; 
 // set global App module
 AppsCo.App = function() {
     var init, notty, execute, act;       
@@ -15,8 +17,7 @@ AppsCo.App = function() {
         this.config = config;
         this.mode = config.mode;
         this.action = config.action;
-        
-        this.act.call('this', 'AppsCo.App.test', 'x', 'y', 'z');
+                
     };
     
     /**
@@ -55,10 +56,15 @@ AppsCo.App = function() {
      * @param {String} name the action name in configuration
      * @scope public
      */
-    act = function(name/*, args*/) {
-        var args = [name, global],
+    act = function(fexp/*, args*/) {               
+        var exp = fexp.split('/'),
+            func = _.find(AppsCo.App.action, function(a) { 
+                    return a.module === exp[0] && a.name === exp[1]; 
+            }), 
+            args = [func ? func.path : '', global],
             params = Array.prototype.slice.call(arguments).splice(1);
         
+        if (!func) { throw 'Undefined action expresion'; }
         args = _.union(args, params);
         return AppsCo.App.execute.apply(this, args);
     };
@@ -92,12 +98,6 @@ AppsCo.App = function() {
         init: init,        
         notty: notty,
         execute: execute,
-        act: act,
-        test: function(a, b, c) {
-            Ti.API.info(this);            
-            Ti.API.info(a);
-            Ti.API.info(b);
-            Ti.API.info(c);       
-        }
+        act: act        
     };
 }();
