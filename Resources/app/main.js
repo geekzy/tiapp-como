@@ -1,9 +1,9 @@
 // This is a single context application with mutliple windows in a stack
 (function() {
-    var Win = require('/ui/common/AppWin');
+    var Win = require('/app/ui/common/AppWin');
     
     if (AppsCo.App.isTablet) {
-        Win = require('/ui/tablet/AppWin');
+        Win = require('/app/ui/tablet/AppWin');
     }
               
     var // create a window
@@ -17,9 +17,11 @@
             abc: 'xyz'
         }, AppsCo.App.ui.buttons.test));
 
-    // listen to click event            
-    btn.click('Try/doSave', btn.getHeight());
-    
+    // listen to click event
+    btn.tap('Try/doSave', btn.getHeight());
+    Ti.Gesture.addEventListener('shake', function(e) {
+        alert('shaken at ' + e.timestamp);
+    });
     // add button into window
     win.add(btn);
     // open the window
