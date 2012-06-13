@@ -28,10 +28,20 @@ AppsCo.App = function() {
         // Device dimension
         height: Ti.Platform.displayCaps.platformHeight,
         width: Ti.Platform.displayCaps.platformWidth,
-        // decide what is considered to be a tablet form factor for android
-        isTablet: this.osname === 'ipad' || 
+        // Device is considered a tablet
+        isTablet: this.osname === 'ipad' ||
+            // decide what is considered to be a tablet form factor for android 
             (this.osname === 'android' && (this.width > 899 || this.height > 899)),
-        
+        props: {
+            win: {},        // common props for windows
+            buttons: {      // common props for buttons
+                test: {
+                    backgroundColor: '#bada55'
+                }
+            },
+            tabs: {},       // common props for tabs
+            labels: {}      // common props for labels
+        },
         // Functions
         init: init,        
         notty: notty
