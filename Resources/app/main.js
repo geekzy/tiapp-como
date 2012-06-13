@@ -14,7 +14,7 @@
             width: '200dp',
             title: 'Click Me!',
             top: '20dp'            
-        }, AppsCo.App.props.buttons.test));
+        }, AppsCo.App.ui.buttons.test));
 
     // listen to click event        
     btn.addEventListener('click', function() {

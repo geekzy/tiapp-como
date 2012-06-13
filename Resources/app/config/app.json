@@ -1,0 +1,8 @@
+{
+    /** app mode **/
+    "mode": "DEV",
+    /** Actions **/
+    "action": [
+        {"name": "doSave", "path": "AppsCo.Controller.Module.doSave"}
+    ]
+}
