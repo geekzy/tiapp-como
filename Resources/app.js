@@ -14,5 +14,8 @@ Ti.include('/vendor/plugins/AppsCo/install.js');
 // include modules
 Ti.include('/app/modules/install.js');
 
+// include and load common UI properties
+Ti.include('/app/config/ui.js');
+
 // include main script
 Ti.include('/app/main.js');

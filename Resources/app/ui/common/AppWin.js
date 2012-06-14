@@ -4,7 +4,7 @@ var AppWin = function(title) {
         backgroundColor: '#fff'
     });
     
-    return self;    
+    return self;
 };
 
 module.exports = AppWin;
