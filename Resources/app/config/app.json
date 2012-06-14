@@ -3,6 +3,7 @@
     "mode": "DEV",
     /** Actions **/
     "action": [        
-        {"module": "Try", "name": "doSave", "path": "AppsCo.Controller.Try.doSave"}
+        {"module": "Try", "name": "doSave", "path": "AppsCo.Module.Try.doSave"},
+        {"module": "Try", "name": "showLogin", "path": "AppsCo.Module.Try.showLogin"}
     ]
 }

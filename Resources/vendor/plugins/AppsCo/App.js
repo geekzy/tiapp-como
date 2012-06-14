@@ -3,7 +3,7 @@ var AppsCo = {
     // set device namespace
     Device: {},
     // set controller namespace
-    Controller: {},
+    Module: {},
     // set model namespace
     Model: {}
 };

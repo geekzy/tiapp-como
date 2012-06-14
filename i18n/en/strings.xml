@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<string name="btnTest">Tap Me!</string>
+	<string name="btnLogin">Login</string>
 </resources>
