@@ -5,10 +5,11 @@ var AppsCo = {
     // set controller namespace
     Controller: {},
     // set model namespace
+    Model: {}
 };
 // set global App module
 AppsCo.App = function() {
-    var init, notty, execute, act;       
+    var init, execute, notty, act, extend;
 
     /**
      * Function to initialize globals
@@ -92,6 +93,16 @@ AppsCo.App = function() {
         return execute.apply(this, args);
     };
 
+    /**
+     * Proxying underscore's object extend function
+     * to preserve defaults
+     */
+    extend = function(defaults, opts/*, more objects to extend*/) {
+        var args = [{}, defaults, opts],
+            objs = Array.prototype.slice.call(arguments).splice(2);
+        return _.extend.apply(this, _.union(args, objs));
+    };
+
     return {
         // ui component default properties
         UI: {
@@ -105,6 +116,7 @@ AppsCo.App = function() {
         // Public Common (App) Scope Functions
         init: init,
         notty: notty,
-        act: act
+        act: act,
+        extend: extend
     };
 }();
