@@ -38,7 +38,8 @@
     </iphone>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest>
-            <supports-screens android:anyDensity="false"/>
+            <supports-screens android:anyDensity="true"
+                android:largeScreens="true" android:normalScreens="true" android:smallScreens="true"/>
         </manifest>
     </android>
     <mobileweb>

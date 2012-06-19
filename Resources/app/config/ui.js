@@ -3,9 +3,14 @@
  */
 _.extend(AppsCo.App.UI, {
     
-    win: {},        // common attributes for windows
+    win: {          // common attributes for windows
+        common: {
+            backgroundColor: '#fff',
+            navBarHidden: false
+        }
+    },
     buttons: {      // common attributes for buttons
-        test: {
+        badass: {
             backgroundColor: '#bada55',
                      height: '44dp',
                       width: '200dp',

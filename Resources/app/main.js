@@ -2,7 +2,7 @@
 // please include your UI components & assign listeners here
 (function() {
     // include components
-    var Win = require('/app/ui/common/AppWin');
+    var UI = require('/app/ui/common/UIShortcut');
 
     if (AppsCo.App.isTablet) {
         Win = require('/app/ui/tablet/AppWin');
@@ -10,22 +10,25 @@
 
     // UI instances / vars
     var // create a window
-        win = new Win('Window One'),
-        // create a button
-        btnTest = Ti.UI.createButton(AppsCo.App.extend(
+        win = UI.win(AppsCo.App.extend(
             // base (common) attributes
-            AppsCo.App.UI.buttons.test,
+            AppsCo.App.UI.win.common, 
             // cuctom attributes
+            { title: 'Main Window', exitOnClose: true }
+        )),        
+        // create a button
+        btnTest = UI.button(AppsCo.App.extend(            
+            AppsCo.App.UI.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
-        btnLogin = Ti.UI.createButton(AppsCo.App.extend(
-            AppsCo.App.UI.buttons.test,
+        btnLogin = UI.button(AppsCo.App.extend(
+            AppsCo.App.UI.buttons.badass,
             { titleid: 'btnLogin', top: '80dp' }
         ));
-
+    
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
-    btnLogin.tap('Try/showLogin');
+    btnLogin.click('Try/showLogin');
 
     // add button into window
     win.add(btnTest);
