@@ -87,7 +87,24 @@ AppsCo.App = (function () {
             args = [func ? func.path : '', global],
             params = Array.prototype.slice.call(arguments).splice(1);
 
-        if (!func) { throw 'Undefined action expresion'; }
+        // can't find action path, it's not defined in config
+        if (!func) {
+            // Try to figure out from the given action path
+            func = AppsCo.Module[exp[0]];
+            func = func ? func[exp[1]] : false;
+
+            // still can't find it, give up!
+            if ((typeof func) === 'undefined') {
+                throw 'Undefined action expresion';
+            }
+            // ok got it, rebuild the base args array
+            else {
+                func = 'AppsCo.Module.' + exp[0] + '.' + exp[1];
+                args = [func, global];
+            }
+        }
+
+        // merge arguments with handler params
         args = _.union(args, params);
         return execute.apply(this, args);
     };

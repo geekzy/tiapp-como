@@ -5,7 +5,6 @@
     "action": [
         {"module": "Try", "name": "doSave", "path": "AppsCo.Module.Try.doSave"},
         {"module": "Try", "name": "showLogin", "path": "AppsCo.Module.Try.showLogin"},
-        {"module": "Try", "name": "doLogin", "path": "AppsCo.Module.Try.doLogin"},
-        {"module": "Try", "name": "doManual", "path": "AppsCo.Module.Try.doManual"}
+        {"module": "Try", "name": "doLogin", "path": "AppsCo.Module.Try.doLogin"}
     ]
 }

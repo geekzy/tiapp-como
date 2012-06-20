@@ -5,7 +5,6 @@ AppsCo.Module.Try = (function () {
     
     /**
      * Example of an action (event handler), can also accept parameters
-     *  
      * @param {Object} h a parameter passed by event handler (during listener assignment).
      * @param {Object} e an event parameter from the original component event.
      */
@@ -73,7 +72,6 @@ AppsCo.Module.Try = (function () {
 
     /**
      * Example of method that manually assign with addEventHandler
-     *
      * and apply it with action method
      * @param {String} s a String parameter
      * @param {Number} n a Number parameter
