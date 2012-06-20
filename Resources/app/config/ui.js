@@ -1,7 +1,7 @@
 /**
  * Definition of UI attributes
  */
-_.extend(AppsCo.App.UI, {
+_.extend(AppsCo.UI, {
 
     win: {          // attributes for windows
 

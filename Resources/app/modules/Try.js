@@ -1,7 +1,7 @@
 AppsCo.Module.Try = (function () {
     "use strict";
     var UI = require('/app/ui/common/UIShortcut'), 
-        doSave, showLogin, doLogin, doSwipe;
+        doSave, showLogin, doLogin, doSwipe, doManual;
     
     /**
      * Example of an action (event handler), can also accept parameters
@@ -27,22 +27,22 @@ AppsCo.Module.Try = (function () {
         AppsCo.App.notty('Showing Login Screen');
         var scrolly = UI.scrolly({contentHeight:'auto'}),
             win = UI.win(AppsCo.App.extend(
-                AppsCo.App.UI.win.common,
+                AppsCo.UI.win.common,
                 {titleid: 'winLogin', backgroundColor: '#bada55'}
             )),
 
             userInText = UI.textfield(AppsCo.App.extend(
-                AppsCo.App.UI.inputs.textfield,
+                AppsCo.UI.inputs.textfield,
                 { id: 'userTxt', hintText: 'username', top: '20dp' }
             )), 
 
             passInText = UI.textfield(AppsCo.App.extend(
-                AppsCo.App.UI.inputs.textfield,
+                AppsCo.UI.inputs.textfield,
                 { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
             )),
             
             loginBtn = UI.button(
-                AppsCo.App.UI.buttons.login, 
+                AppsCo.UI.buttons.login,
                 // Listen to tap events
                 'Try/doLogin', scrolly, win
             );
@@ -70,10 +70,28 @@ AppsCo.Module.Try = (function () {
         win.close();
     };
 
+
+    /**
+     * Example of method that manually assign with addEventHandler
+     *
+     * and apply it with action method
+     * @param {String} s a String parameter
+     * @param {Number} n a Number parameter
+     * @param {Boolean} b a Boolean parameter
+     * @param {Object} e an Event object related
+     */
+    doManual = function(s, n, b, e) {
+
+        Ti.API.info('s = ' + s);
+        Ti.API.info('n = ' + n);
+        Ti.API.info('b = ' + b);
+        Ti.API.info(e.source instanceof Ti.UI.Window);
+
+    };
     return {
         doSave: doSave,
         showLogin: showLogin,
         doLogin: doLogin,
-        doSwipe: doSwipe
+        doManual: doManual
     };
 }());

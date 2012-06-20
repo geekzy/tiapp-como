@@ -12,26 +12,33 @@
     var // create a window
         win = UI.win(AppsCo.App.extend(
             // base (common) attributes
-            AppsCo.App.UI.win.common, 
+            AppsCo.UI.win.common,
             // cuctom attributes
             { titleid: 'winMain', exitOnClose: true }
         )),        
         // create a button
         btnTest = UI.button(AppsCo.App.extend(            
-            AppsCo.App.UI.buttons.badass,
+            AppsCo.UI.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
         btnLogin = UI.button(AppsCo.App.extend(
-            AppsCo.App.UI.buttons.badass,
+            AppsCo.UI.buttons.badass,
             { titleid: 'btnLogin', top: '80dp' }
         ));
     
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
     btnLogin.click('Try/showLogin');
-    win.tap(function () {
-       Ti.API.info('Window Tapped!');
-    });    
+    win.tap(function (e) {
+        // prevent event bubblic from children's tap event
+        if (e.source === win) {
+            Ti.API.info('Window Tapped!');
+            // fire custom event
+            win.fireEvent('winTap', {p1: 'xxx'});
+        }
+    });
+    // listen to custom event
+    win.addEventListener('winTap', AppsCo.App.applyAction('Try/doManual', 'x', 1, true));
 
     // add button into window
     win.add(btnTest);

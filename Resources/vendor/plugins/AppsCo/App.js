@@ -5,16 +5,17 @@ var AppsCo = {
     // set controller namespace
     Module: {},
     // set model namespace
-    Model: {}
+    Model: {},
+    // ui component namespace
+    UI: {}
 };
 // set global App module
 AppsCo.App = (function () {
     "use strict";
-    var init, execute, notty, act, extend;
+    var init, execute, notty, act, extend, applyAction;
 
     /**
      * Function to initialize globals
-     * @scope public
      */
     init = function () {
         // get configurations
@@ -49,7 +50,6 @@ AppsCo.App = (function () {
      * Execute a function within a context
      * @param {String} functionName the function name/path
      * @param {Object} context the context of the function to execute
-     * @scope private
      */
     execute = function (fnName, context /*, args */) {        
         var i, args = Array.prototype.slice.call(arguments).splice(2),
@@ -67,7 +67,6 @@ AppsCo.App = (function () {
     /**
      * Function to show notification
      * @param {String} msg the message to notify
-     * @scope public
      */
     notty = function (msg, duration) {
         Ti.UI.createNotification({
@@ -78,8 +77,7 @@ AppsCo.App = (function () {
 
     /**
      * Function to trigger action
-     * @param {String} name the action name in configuration
-     * @scope public
+     * @param {String} fexp the action path in configuration
      */
     act = function (fexp/*, args*/) {
         var exp = fexp.split('/'),
@@ -97,6 +95,8 @@ AppsCo.App = (function () {
     /**
      * Proxying underscore's object extend function
      * to preserve defaults
+     * @param {Object} defaults the base object to apply to
+     * @param {Object} opts the custom attributes to apply to base (defaults)
      */
     extend = function (defaults, opts/*, more objects to extend*/) {
         var args = [{}, defaults, opts],
@@ -104,20 +104,24 @@ AppsCo.App = (function () {
         return _.extend.apply(this, _.union(args, objs));
     };
 
-    return {
-        // ui component default properties
-        UI: {
-            win: {},        // default props for windows
-            buttons: {},    // default props for buttons
-            tabs: {},       // default props for tabs
-            labels: {}      // default props for labels
-            // etc
-        },
+    /**
+     * Apply action path to a function configured at app.json config
+     * @param {String} action the action path in to apply its function to
+     */
+    applyAction = function (action/*, args*/) {
+        var args = arguments;
+        return function (e) {
+            [].push.apply(args, [e]);
+            act.apply(this, args);
+        };
+    }
 
-        // Public Common (App) Scope Functions
+    // Public Common (App) Scope Functions
+    return {
         init: init,
         notty: notty,
         act: act,
-        extend: extend
+        extend: extend,
+        applyAction: applyAction
     };
 }());
