@@ -41,9 +41,9 @@ AppsCo.Module.Try = function () {
             )),
             
             loginBtn = UI.button(
-                AppsCo.App.UI.buttons.login/*, 
+                AppsCo.App.UI.buttons.login, 
                 // Listen to tap events
-                'Try/doLogin', scrolly, win*/
+                'Try/doLogin', scrolly, win
             );
 
         // add form elements into view
@@ -51,10 +51,7 @@ AppsCo.Module.Try = function () {
         scrolly.add(passInText);
         scrolly.add(loginBtn);
         // add view into window
-        win.add(scrolly);
-
-        // Listen to login button tap
-        loginBtn.tap("Try/doLogin", scrolly.getChildren(), win);
+        win.add(scrolly);        
 
         win.open();
     };

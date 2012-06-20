@@ -18,14 +18,17 @@
 
     handlerFn = function(evtName) {
         return function() {
-            var applyFn, args = arguments;
+            var applyFn, args = arguments, inline = (typeof args[0]) === 'function';                       
+            
+            if (_.size(args) === 0) { applyFn = function() {}; }
+            else {
+                applyFn = function(e) {
+                    [].push.apply(args, [e]);
+                    AppsCo.App.act.apply(this, args);
+                };
+            }
 
-            applyFn = function(e) {
-                [].push.apply(args, [e]);
-                AppsCo.App.act.apply(this, args);
-            };
-
-            this.addEventListener(evtName, applyFn);
+            this.addEventListener(evtName, inline ? args[0] : applyFn);
         };
     };
 

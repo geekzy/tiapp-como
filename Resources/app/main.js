@@ -29,6 +29,9 @@
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
     btnLogin.click('Try/showLogin');
+    win.tap(function() {
+       Ti.API.info('Window Tapped!');
+    });    
 
     // add button into window
     win.add(btnTest);
