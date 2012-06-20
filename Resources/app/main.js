@@ -1,6 +1,6 @@
 // single context application, 
 // please include your UI components & assign listeners here
-(function() {
+(function () {
     // include components
     var UI = require('/app/ui/common/UIShortcut');
 
@@ -29,7 +29,7 @@
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
     btnLogin.click('Try/showLogin');
-    win.tap(function() {
+    win.tap(function () {
        Ti.API.info('Window Tapped!');
     });    
 

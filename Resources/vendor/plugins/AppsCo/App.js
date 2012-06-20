@@ -8,14 +8,15 @@ var AppsCo = {
     Model: {}
 };
 // set global App module
-AppsCo.App = function() {
+AppsCo.App = (function () {
+    "use strict";
     var init, execute, notty, act, extend;
 
     /**
      * Function to initialize globals
      * @scope public
      */
-    init = function() {
+    init = function () {
         // get configurations
         var cf = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, 'app/config/app.json').read(),
             config = eval('(' + cf + ')');
@@ -50,17 +51,17 @@ AppsCo.App = function() {
      * @param {Object} context the context of the function to execute
      * @scope private
      */
-    execute = function(fnName, context /*, args */) {
-        context = context || window;
+    execute = function (fnName, context /*, args */) {        
         var i, args = Array.prototype.slice.call(arguments).splice(2),
             namespaces = fnName.split("."),
-            func = namespaces.pop();
+            func = namespaces.pop(),
+            ctx = context || window;
 
-        for(i = 0; i < namespaces.length; i++) {
-            context = context[namespaces[i]];
+        for(i = 0; i < namespaces.length; i += 1) {
+            ctx = ctx[namespaces[i]];
         }
 
-        return context[func].apply(this, args);
+        return ctx[func].apply(this, args);
     };
 
     /**
@@ -68,7 +69,7 @@ AppsCo.App = function() {
      * @param {String} msg the message to notify
      * @scope public
      */
-    notty = function(msg, duration) {
+    notty = function (msg, duration) {
         Ti.UI.createNotification({
             message: msg || '',
             duration: duration || Ti.UI.NOTIFICATION_DURATION_SHORT
@@ -80,9 +81,9 @@ AppsCo.App = function() {
      * @param {String} name the action name in configuration
      * @scope public
      */
-    act = function(fexp/*, args*/) {
+    act = function (fexp/*, args*/) {
         var exp = fexp.split('/'),
-            func = _.find(AppsCo.action, function(a) {
+            func = _.find(AppsCo.action, function (a) {
                     return a.module === exp[0] && a.name === exp[1];
             }),
             args = [func ? func.path : '', global],
@@ -97,7 +98,7 @@ AppsCo.App = function() {
      * Proxying underscore's object extend function
      * to preserve defaults
      */
-    extend = function(defaults, opts/*, more objects to extend*/) {
+    extend = function (defaults, opts/*, more objects to extend*/) {
         var args = [{}, defaults, opts],
             objs = Array.prototype.slice.call(arguments).splice(2);
         return _.extend.apply(this, _.union(args, objs));
@@ -119,4 +120,4 @@ AppsCo.App = function() {
         act: act,
         extend: extend
     };
-}();
+}());

@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     var // common apply function for events
         handlerFn,
@@ -16,13 +16,13 @@
             Ti.UI.ActivityIndicator
         ];
 
-    handlerFn = function(evtName) {
-        return function() {
+    handlerFn = function (evtName) {
+        return function () {
             var applyFn, args = arguments, inline = (typeof args[0]) === 'function';                       
             
-            if (_.size(args) === 0) { applyFn = function() {}; }
+            if (_.size(args) === 0) { applyFn = function () {}; }
             else {
-                applyFn = function(e) {
+                applyFn = function (e) {
                     [].push.apply(args, [e]);
                     AppsCo.App.act.apply(this, args);
                 };
@@ -32,7 +32,7 @@
         };
     };
 
-    _.each(uiObjects, function(obj) {
+    _.each(uiObjects, function (obj) {
         _.extend(obj.prototype, {
             click: handlerFn('click'),
             tap: handlerFn('touchstart'),

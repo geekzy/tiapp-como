@@ -1,4 +1,5 @@
-AppsCo.Module.Try = function () {
+AppsCo.Module.Try = (function () {
+    "use strict";
     var UI = require('/app/ui/common/UIShortcut'), 
         doSave, showLogin, doLogin, doSwipe;
     
@@ -22,7 +23,7 @@ AppsCo.Module.Try = function () {
     /**
      * Show login event will create a window and a form to login.
      */
-    showLogin = function() {
+    showLogin = function () {
         AppsCo.App.notty('Showing Login Screen');
         var scrolly = UI.scrolly({contentHeight:'auto'}),
             win = UI.win(AppsCo.App.extend(
@@ -59,7 +60,7 @@ AppsCo.Module.Try = function () {
     /**
      * User login event handler
      */
-    doLogin = function(view, win) {
+    doLogin = function (view, win) {
         var viewElt = view.getChildren(), 
             userTxt = viewElt[0], passTxt = viewElt[1];
 
@@ -75,4 +76,4 @@ AppsCo.Module.Try = function () {
         doLogin: doLogin,
         doSwipe: doSwipe
     };
-}();
+}());
