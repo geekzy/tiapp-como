@@ -1,7 +1,6 @@
 AppsCo.Module.Try = function () {
-    var Win = require('/app/ui/common/AppWin'), 
-        UI = require('/app/ui/common/UIShortcut'), 
-        doSave, showLogin, doLogin;
+    var UI = require('/app/ui/common/UIShortcut'), 
+        doSave, showLogin, doLogin, doSwipe;
     
     /**
      * Example of an action (event handler), can also accept parameters
@@ -26,29 +25,26 @@ AppsCo.Module.Try = function () {
     showLogin = function() {
         AppsCo.App.notty('Showing Login Screen');
         var scrolly = UI.scrolly({contentHeight:'auto'}),
-            win = UI.win({title: 'User Login', backgroundColor: '#bada55', navBarHidden: false}),
+            win = UI.win(AppsCo.App.extend(
+                AppsCo.App.UI.win.common,
+                {titleid: 'winLogin', backgroundColor: '#bada55'}
+            )),
 
-            userInText = UI.textfield({
-                id: 'userTxt',
-                borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-                keyboardType: Titanium.UI.KEYBOARD_ASCII,
-                color: '#336699', height: '40dp', width: '250dp', hintText: 'username', top: '20dp'
-            }), 
+            userInText = UI.textfield(AppsCo.App.extend(
+                AppsCo.App.UI.inputs.textfield,
+                { id: 'userTxt', hintText: 'username', top: '20dp' }
+            )), 
 
-            passInText = UI.textfield({
-                id:  'passTxt',
-                borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-                keyboardType: Titanium.UI.KEYBOARD_ASCII,
-                color: '#336699', height: '40dp', width: '250dp', hintText: 'password', top: '70dp',
-                passwordMask: true
-            }),
+            passInText = UI.textfield(AppsCo.App.extend(
+                AppsCo.App.UI.inputs.textfield,
+                { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
+            )),
             
-            loginBtn = UI.button({
-                    titleid: 'btnLogin',
-                    color: '#ffffff', backgroundColor: '#223344', height: '35dp', width: '150dp', top: '120dp'
-                }, 
-            // Listen to tap events
-            'Try/doLogin', scrolly, win);
+            loginBtn = UI.button(
+                AppsCo.App.UI.buttons.login/*, 
+                // Listen to tap events
+                'Try/doLogin', scrolly, win*/
+            );
 
         // add form elements into view
         scrolly.add(userInText);
@@ -58,8 +54,8 @@ AppsCo.Module.Try = function () {
         win.add(scrolly);
 
         // Listen to login button tap
-        //loginBtn.tap("Try/doLogin", scrolly.getChildren(), win);
-        
+        loginBtn.tap("Try/doLogin", scrolly.getChildren(), win);
+
         win.open();
     };
 
@@ -69,16 +65,17 @@ AppsCo.Module.Try = function () {
     doLogin = function(view, win) {
         var viewElt = view.getChildren(), 
             userTxt = viewElt[0], passTxt = viewElt[1];
-        
+
         AppsCo.App.notty("username is " + userTxt.value);
         AppsCo.App.notty("password is " + passTxt.value);
-        
+
         win.close();
-        
     };
+
     return {
         doSave: doSave,
         showLogin: showLogin,
-        doLogin: doLogin
+        doLogin: doLogin,
+        doSwipe: doSwipe
     };
 }();

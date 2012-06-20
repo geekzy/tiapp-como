@@ -14,7 +14,7 @@
             // base (common) attributes
             AppsCo.App.UI.win.common, 
             // cuctom attributes
-            { title: 'Main Window', exitOnClose: true }
+            { titleid: 'winMain', exitOnClose: true }
         )),        
         // create a button
         btnTest = UI.button(AppsCo.App.extend(            

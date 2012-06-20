@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+    <!-- Windows -->
+    <string name="winMain">Main Window</string>
+    <string name="winLogin">User Login</string>
+    
+    <!-- Buttons -->
 	<string name="btnTest">Tap Me!</string>
-	<string name="btnLogin">Login</string>
+	<string name="btnLogin">Login</string>	
 </resources>

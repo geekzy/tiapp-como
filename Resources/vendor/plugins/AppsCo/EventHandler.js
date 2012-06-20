@@ -1,27 +1,41 @@
 (function() {
-    
-    // common apply function for events
-    var handlerFn;       
-    
+
+    var // common apply function for events
+        handlerFn,
+        // UI Objects Collection to be extended
+        uiObjects = [
+            Ti.UI.View,
+            Ti.UI.ScrollView,
+            Ti.UI.Label,
+            Ti.UI.TextField,
+            Ti.UI.TextArea,
+            Ti.UI.ImageView,
+            Ti.UI.Window,
+            Ti.UI.Button,
+            Ti.UI.Picker,
+            Ti.UI.ActivityIndicator
+        ];
+
     handlerFn = function(evtName) {
         return function() {
             var applyFn, args = arguments;
-            
+
             applyFn = function(e) {
-                [].push.apply(args, [e]);        
+                [].push.apply(args, [e]);
                 AppsCo.App.act.apply(this, args);
             };
-            
+
             this.addEventListener(evtName, applyFn);
         };
     };
-    
-    // Extend existing Ti Objects : Button.click
-    Ti.UI.Button.prototype.click = handlerFn('click');
-    // Extend existing Ti Objects : Button.tap
-    Ti.UI.Button.prototype.tap = handlerFn('touchstart');
-    // Extend existing Ti Objects : Button.taphold
-    Ti.UI.Button.prototype.taphold = handlerFn('longpress'); 
-    // Extend existing Ti Objects : Button.swipe
-    Ti.UI.Button.prototype.swipe = handlerFn('swipe');
+
+    _.each(uiObjects, function(obj) {
+        _.extend(obj.prototype, {
+            click: handlerFn('click'),
+            tap: handlerFn('touchstart'),
+            taphold: handlerFn('longpress'),
+            swipe: handlerFn('swipe')
+        });
+    });
+
 }());

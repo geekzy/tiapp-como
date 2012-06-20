@@ -1,24 +1,52 @@
 /**
- * Definition of common UI attributes
+ * Definition of UI attributes
  */
 _.extend(AppsCo.App.UI, {
-    
-    win: {          // common attributes for windows
-        common: {
+
+    win: {          // attributes for windows
+
+        common: {   // common attributes for windows
             backgroundColor: '#fff',
-            navBarHidden: false
+               navBarHidden: false
         }
+
     },
-    buttons: {      // common attributes for buttons
+
+    buttons: {      // attributes for buttons
+
         badass: {
             backgroundColor: '#bada55',
                      height: '44dp',
                       width: '200dp',
                         top: '20dp'
+        },
+
+        login: {
+            backgroundColor: '#223344',
+                    titleid: 'btnLogin',
+                      color: '#ffffff',
+                     height: '35dp',
+                      width: '150dp',
+                        top: '120dp'
         }
-    },    
-    tabs: {},       // common attributes for tabs
-    labels: {}      // common attributes for labels
+  
+    },
+
+    tabs: {},       // attributes for tabs
+
+    labels: {},     // attributes for labels
+
+    inputs: {       // attributes for inputs
+
+        textfield: {
+            keyboardType: Titanium.UI.KEYBOARD_ASCII,
+             borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+                   color: '#336699',
+                  height: '40dp',
+                   width: '250dp'
+        }
+
+    }
     // etc
-    
+
 });
