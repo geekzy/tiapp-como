@@ -1,8 +1,8 @@
 AppsCo.Module.Try = (function () {
     "use strict";
-    var UI = require('/app/ui/common/UIShortcut'), 
+    var UI = require('/app/ui/common/UIShortcut'),
         doSave, showLogin, doLogin, doSwipe, doManual;
-    
+
     /**
      * Example of an action (event handler), can also accept parameters
      * @param {Object} h a parameter passed by event handler (during listener assignment).
@@ -10,15 +10,15 @@ AppsCo.Module.Try = (function () {
      */
     doSave = function (h, e) {
         var btn = e.source;
-        
+
         Ti.API.info('Button Height is : ' + h);
         Ti.API.info('btn.abc : ' + btn.abc);
-        
+
         AppsCo.App.notty('OS['+ AppsCo.Device.osname +'] Version['+ AppsCo.Device.version +']');
         AppsCo.App.notty('Width['+ AppsCo.Device.width +'] Height['+ AppsCo.Device.height +']');
         AppsCo.App.notty((AppsCo.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
     };
-    
+
     /**
      * Show login event will create a window and a form to login.
      */
@@ -33,13 +33,13 @@ AppsCo.Module.Try = (function () {
             userInText = UI.textfield(AppsCo.App.extend(
                 AppsCo.UI.inputs.textfield,
                 { id: 'userTxt', hintText: 'username', top: '20dp' }
-            )), 
+            )),
 
             passInText = UI.textfield(AppsCo.App.extend(
                 AppsCo.UI.inputs.textfield,
                 { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
             )),
-            
+
             loginBtn = UI.button(
                 AppsCo.UI.buttons.login,
                 // Listen to tap events
@@ -51,7 +51,7 @@ AppsCo.Module.Try = (function () {
         scrolly.add(passInText);
         scrolly.add(loginBtn);
         // add view into window
-        win.add(scrolly);        
+        win.add(scrolly);
 
         win.open();
     };
@@ -60,7 +60,7 @@ AppsCo.Module.Try = (function () {
      * User login event handler
      */
     doLogin = function (view, win) {
-        var viewElt = view.getChildren(), 
+        var viewElt = view.getChildren(),
             userTxt = viewElt[0], passTxt = viewElt[1];
 
         AppsCo.App.notty("username is " + userTxt.value);

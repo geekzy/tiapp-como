@@ -18,8 +18,8 @@
 
     handlerFn = function (evtName) {
         return function () {
-            var applyFn, args = arguments, inline = (typeof args[0]) === 'function';                       
-            
+            var applyFn, args = arguments, inline = (typeof args[0]) === 'function';
+
             if (_.size(args) === 0) { applyFn = function () {}; }
             else {
                 applyFn = function (e) {

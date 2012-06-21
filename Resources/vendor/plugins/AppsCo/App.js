@@ -32,26 +32,27 @@ AppsCo.App = (function () {
         AppsCo.Device.iphone = AppsCo.Device.osname === 'iphone';
         AppsCo.Device.ipad = AppsCo.Device.osname === 'ipad';
         AppsCo.Device.android = AppsCo.Device.osname === 'android';
-        
-        // Device is considered a tablet
-        AppsCo.Device.isTablet = AppsCo.Device.ipad ||
-            // decide what is considered to be a tablet form factor for android
-            (AppsCo.Device.android && (this.width > 899 || this.height > 899));
-            
+
         // Device dimension
         AppsCo.Device.height = Ti.Platform.displayCaps.platformHeight;
         AppsCo.Device.width = Ti.Platform.displayCaps.platformWidth;
+
+        // Device is considered a tablet
+        AppsCo.Device.isTablet = AppsCo.Device.ipad ||
+            // decide what is considered to be a tablet form factor for android
+            (AppsCo.Device.android && (AppsCo.Device.width > 899 || AppsCo.Device.height > 899));
+
         // Device Current State
         AppsCo.Device.locale = Ti.Platform.locale;
-        
+
     };
-    
+
     /**
      * Execute a function within a context
      * @param {String} functionName the function name/path
      * @param {Object} context the context of the function to execute
      */
-    execute = function (fnName, context /*, args */) {        
+    execute = function (fnName, context /*, args */) {
         var i, args = Array.prototype.slice.call(arguments).splice(2),
             namespaces = fnName.split("."),
             func = namespaces.pop(),

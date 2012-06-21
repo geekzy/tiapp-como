@@ -29,7 +29,7 @@ _.extend(AppsCo.UI, {
                       width: '150dp',
                         top: '120dp'
         }
-  
+
     },
 
     tabs: {},       // attributes for tabs

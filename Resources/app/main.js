@@ -1,4 +1,4 @@
-// single context application, 
+// single context application,
 // please include your UI components & assign listeners here
 (function () {
     // include components
@@ -15,9 +15,9 @@
             AppsCo.UI.win.common,
             // cuctom attributes
             { titleid: 'winMain', exitOnClose: true }
-        )),        
+        )),
         // create a button
-        btnTest = UI.button(AppsCo.App.extend(            
+        btnTest = UI.button(AppsCo.App.extend(
             AppsCo.UI.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
@@ -25,7 +25,7 @@
             AppsCo.UI.buttons.badass,
             { titleid: 'btnLogin', top: '80dp' }
         ));
-    
+
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
     btnLogin.click('Try/showLogin');
