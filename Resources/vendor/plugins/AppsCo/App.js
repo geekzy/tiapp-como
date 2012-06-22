@@ -45,6 +45,8 @@ AppsCo.App = (function () {
         // Device Current State
         AppsCo.Device.locale = Ti.Platform.locale;
 
+        // Create db Connection
+        joli.connection = new joli.Connection(AppsCo.config.db);
     };
 
     /**

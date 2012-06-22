@@ -4,10 +4,6 @@
     // include components
     var UI = require('/app/ui/common/UIShortcut');
 
-    if (AppsCo.App.isTablet) {
-        Win = require('/app/ui/tablet/AppWin');
-    }
-
     // UI instances / vars
     var // create a window
         win = UI.win(AppsCo.App.extend(

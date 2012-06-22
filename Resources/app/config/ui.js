@@ -6,6 +6,7 @@ _.extend(AppsCo.UI, {
     win: {          // attributes for windows
 
         common: {   // common attributes for windows
+                 fullscreen: true,
             backgroundColor: '#fff',
                navBarHidden: false
         }
