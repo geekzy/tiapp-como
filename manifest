@@ -1,9 +1,9 @@
-#appname:tiapp-exercise
-#appid:biz.appsco.mobile.ti.tiappexercise
+#appname:tiapp-como
+#appid:biz.appsco.mobile.ti.tiappcomo
 #type:mobile
 #guid:b5532cc6-a299-4380-a897-87de50f8983a
 #version:1.0
 #publisher:AppsCo
 #url:http://mobile.appsco.biz/
 #image:appicon.png
-#desc:Titanium Appscelerator RnD project exercise
+#desc:Como is a Titanium Appscelerator MVC Framework

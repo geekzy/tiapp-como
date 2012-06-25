@@ -8,12 +8,12 @@
         <target device="android">true</target>
     </deployment-targets>
     <sdk-version>2.0.3.v20120605111708</sdk-version>
-    <id>biz.appsco.mobile.ti.tiappexercise</id>
-    <name>tiapp-exercise</name>
+    <id>biz.appsco.mobile.ti.tiappcomo</id>
+    <name>tiapp-como</name>
     <version>1.0</version>
     <publisher>AppsCo</publisher>
     <url>http://mobile.appsco.biz/</url>
-    <description>Titanium Appscelerator RnD project exercise</description>
+    <description>Como is a Titanium Appscelerator MVC Framework</description>
     <copyright>2012 by AppsCo</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
