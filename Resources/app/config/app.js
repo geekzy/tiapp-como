@@ -9,7 +9,8 @@ var config = {
     action: [
         {module: 'Try',     name: 'doSave',         path: 'Como.Controller.Try.doSave'},
         {module: 'Try',     name: 'showLogin',      path: 'Como.Controller.Try.showLogin'},
-        {module: 'Try',     name: 'doLogin',        path: 'Como.Controller.Try.doLogin'}
+        {module: 'Try',     name: 'doLogin',        path: 'Como.Controller.Try.doLogin'},
+        {module: 'Try',     name: 'doLogout',       path: 'Como.Controller.Try.doLogout'}
     ]
 };
 

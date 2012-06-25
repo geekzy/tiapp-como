@@ -1,8 +1,6 @@
 Como.Controller.Try = (function () {
     "use strict";
-    var _ = require('/lib/Underscore/underscore.min'),
-        UI = require('/app/views/common/UIShortcut'),
-        doSave, showLogin, doLogin, doSwipe, doManual;
+    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -24,45 +22,9 @@ Como.Controller.Try = (function () {
      * Show login event will create a window and a form to login.
      */
     showLogin = function () {
-        Como.App.notty('Showing Login Screen');
-
-        (function () {
-            var users = Como.Model.User.all();
-            Como.App.notty(Como.Model.User.info());
-            _.each(users, function(u) {
-                Como.App.notty('Found user' + u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
-            });
-        }());
-
-        var scrolly = UI.scrolly({contentHeight:'auto'}),
-            win = UI.win(Como.App.extend(
-                Como.UI.win.common,
-                {titleid: 'winLogin', backgroundColor: '#bada55'}
-            )),
-
-            userInText = UI.textfield(Como.App.extend(
-                Como.UI.inputs.textfield,
-                { id: 'userTxt', hintText: 'username', top: '20dp' }
-            )),
-
-            passInText = UI.textfield(Como.App.extend(
-                Como.UI.inputs.textfield,
-                { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
-            )),
-
-            loginBtn = UI.button(
-                Como.UI.buttons.login,
-                // Listen to tap events
-                'Try/doLogin', scrolly, win
-            );
-
-        // add form elements into view
-        scrolly.add(userInText);
-        scrolly.add(passInText);
-        scrolly.add(loginBtn);
-        // add view into window
-        win.add(scrolly);
-
+        var // UI instances / vars
+            win = require('/app/views/common/loginWin')(Como);
+        //  open it;
         win.open();
     };
 
@@ -96,6 +58,13 @@ Como.Controller.Try = (function () {
         win.close();
     };
 
+    /**
+     * User logout event handler
+     */
+    doLogout = function (win) {
+        Como.Model.User.truncate();
+        win.close();
+    };
 
     /**
      * Example of method that manually assign with addEventHandler
@@ -117,6 +86,7 @@ Como.Controller.Try = (function () {
         doSave: doSave,
         showLogin: showLogin,
         doLogin: doLogin,
+        doLogout: doLogout,
         doManual: doManual
     };
 }());

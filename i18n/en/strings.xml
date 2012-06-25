@@ -3,8 +3,10 @@
     <!-- Windows -->
     <string name="winMain">Main Window</string>
     <string name="winLogin">User Login</string>
-    
+    <string name="winLogout">User Logout</string>
+
     <!-- Buttons -->
-	<string name="btnTest">Tap Me!</string>
-	<string name="btnLogin">Login</string>	
+    <string name="btnTest">Tap Me!</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnLogout">Logout</string>
 </resources>

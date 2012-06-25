@@ -12,7 +12,9 @@ var Como = {
 // set global App module
 Como.App = (function () {
     "use strict";
-    var _ = require('/lib/Underscore/underscore.min'),
+    var // include underscore utility-belt
+        _ = require('/lib/Underscore/underscore.min'),
+        // Como.App utility methods
         init, execute, notty, act, extend, applyAction;
 
     /**

@@ -2,7 +2,9 @@
  * Definition of UI attributes
  */
 (function () {
-    var _ = require('/lib/Underscore/underscore.min');
+    var // include underscore utility-belt
+        _ = require('/lib/Underscore/underscore.min');
+
     _.extend(Como.UI, {
 
         win: {          // attributes for windows

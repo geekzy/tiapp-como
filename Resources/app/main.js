@@ -1,44 +1,9 @@
 // single context application,
-// please include your UI components & assign listeners here
+// please include your main Window UI components here
 (function () {
     // include components
-    var UI = require('/app/views/common/UIShortcut');
-
-    // UI instances / vars
-    var // create a window
-        win = UI.win(Como.App.extend(
-            // base (common) attributes
-            Como.UI.win.common,
-            // cuctom attributes
-            { titleid: 'winMain', exitOnClose: true }
-        )),
-        // create a button
-        btnTest = UI.button(Como.App.extend(
-            Como.UI.buttons.badass,
-            { titleid: 'btnTest', abc: 'xyz' }
-        )),
-        btnLogin = UI.button(Como.App.extend(
-            Como.UI.buttons.badass,
-            { titleid: 'btnLogin', top: '80dp' }
-        ));
-
-    // listen to tap event
-    btnTest.tap('Try/doSave', btnTest.getHeight());
-    btnLogin.click('Try/showLogin');
-    win.tap(function (e) {
-        // prevent event bubblic from children's tap event
-        if (e.source === win) {
-            Ti.API.info('Window Tapped!');
-            // fire custom event
-            win.fireEvent('winTap', {p1: 'xxx'});
-        }
-    });
-    // listen to custom event
-    win.addEventListener('winTap', Como.App.applyAction('Try/doManual', 'x', 1, true));
-
-    // add button into window
-    win.add(btnTest);
-    win.add(btnLogin);
+    var // UI instances / vars
+        win = require('/app/views/common/mainWin')(Como);
     // open the window
     win.open();
 }());
