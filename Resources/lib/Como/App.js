@@ -1,5 +1,5 @@
 // set global AppsCo Mobile namespace
-var AppsCo = {
+var Como = {
     // set device namespace
     Device: {},
     // set controller namespace
@@ -10,7 +10,7 @@ var AppsCo = {
     UI: {}
 };
 // set global App module
-AppsCo.App = (function () {
+Como.App = (function () {
     "use strict";
     var _ = require('/lib/Underscore/underscore.min'),
         init, execute, notty, act, extend, applyAction;
@@ -26,31 +26,31 @@ AppsCo.App = (function () {
             joli = require('/lib/Joli/joli'),
             joliApi = require('/lib/Joli/joli.api');
 
-        AppsCo.config = config;
-        AppsCo.mode = config.mode;
-        AppsCo.action = config.action;
+        Como.config = config;
+        Como.mode = config.mode;
+        Como.action = config.action;
 
         // Device OS and Version
-        AppsCo.Device.osname = Ti.Platform.osname;
-        AppsCo.Device.version = Ti.Platform.version;
-        AppsCo.Device.iphone = AppsCo.Device.osname === 'iphone';
-        AppsCo.Device.ipad = AppsCo.Device.osname === 'ipad';
-        AppsCo.Device.android = AppsCo.Device.osname === 'android';
+        Como.Device.osname = Ti.Platform.osname;
+        Como.Device.version = Ti.Platform.version;
+        Como.Device.iphone = Como.Device.osname === 'iphone';
+        Como.Device.ipad = Como.Device.osname === 'ipad';
+        Como.Device.android = Como.Device.osname === 'android';
 
         // Device dimension
-        AppsCo.Device.height = Ti.Platform.displayCaps.platformHeight;
-        AppsCo.Device.width = Ti.Platform.displayCaps.platformWidth;
+        Como.Device.height = Ti.Platform.displayCaps.platformHeight;
+        Como.Device.width = Ti.Platform.displayCaps.platformWidth;
 
         // Device is considered a tablet
-        AppsCo.Device.isTablet = AppsCo.Device.ipad ||
+        Como.Device.isTablet = Como.Device.ipad ||
             // decide what is considered to be a tablet form factor for android
-            (AppsCo.Device.android && (AppsCo.Device.width > 899 || AppsCo.Device.height > 899));
+            (Como.Device.android && (Como.Device.width > 899 || Como.Device.height > 899));
 
         // Device Current State
-        AppsCo.Device.locale = Ti.Platform.locale;
+        Como.Device.locale = Ti.Platform.locale;
 
         // Create db Connection
-        AppsCo.joli = joliApi(joli).connect(AppsCo.config.db);
+        Como.joli = joliApi(joli).connect(Como.config.db);
     };
 
     /**
@@ -88,7 +88,7 @@ AppsCo.App = (function () {
      */
     act = function (fexp/*, args*/) {
         var exp = fexp.split('/'),
-            func = _.find(AppsCo.action, function (a) {
+            func = _.find(Como.action, function (a) {
                     return a.module === exp[0] && a.name === exp[1];
             }),
             args = [func ? func.path : '', global],
@@ -97,7 +97,7 @@ AppsCo.App = (function () {
         // can't find action path, it's not defined in config
         if (!func) {
             // Try to figure out from the given action path
-            func = AppsCo.Module[exp[0]];
+            func = Como.Controller[exp[0]];
             func = func ? func[exp[1]] : false;
 
             // still can't find it, give up!
@@ -106,7 +106,7 @@ AppsCo.App = (function () {
             }
             // ok got it, rebuild the base args array
             else {
-                func = 'AppsCo.Module.' + exp[0] + '.' + exp[1];
+                func = 'Como.Controller.' + exp[0] + '.' + exp[1];
                 args = [func, global];
             }
         }

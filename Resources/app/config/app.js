@@ -7,9 +7,9 @@ var config = {
 
     /** Actions **/
     action: [
-        {module: 'Try',     name: 'doSave',         path: 'AppsCo.Controller.Try.doSave'},
-        {module: 'Try',     name: 'showLogin',      path: 'AppsCo.Controller.Try.showLogin'},
-        {module: 'Try',     name: 'doLogin',        path: 'AppsCo.Controller.Try.doLogin'}
+        {module: 'Try',     name: 'doSave',         path: 'Como.Controller.Try.doSave'},
+        {module: 'Try',     name: 'showLogin',      path: 'Como.Controller.Try.showLogin'},
+        {module: 'Try',     name: 'doLogin',        path: 'Como.Controller.Try.doLogin'}
     ]
 };
 

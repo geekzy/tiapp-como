@@ -6,9 +6,9 @@ if (Ti.version < 1.8 ) {
 var global = this;
 
 // include global namespace and functionality
-Ti.include('/lib/AppsCo/install.js');
+Ti.include('/lib/Como/install.js');
 
-// include controllers initially
+// include models & controllers initially
 Ti.include('/app/config/load.js');
 
 // include and load UI properties configuration

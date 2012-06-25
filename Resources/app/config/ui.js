@@ -3,7 +3,7 @@
  */
 (function () {
     var _ = require('/lib/Underscore/underscore.min');
-    _.extend(AppsCo.UI, {
+    _.extend(Como.UI, {
 
         win: {          // attributes for windows
 

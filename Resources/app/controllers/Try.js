@@ -1,4 +1,4 @@
-AppsCo.Controller.Try = (function () {
+Como.Controller.Try = (function () {
     "use strict";
     var _ = require('/lib/Underscore/underscore.min'),
         UI = require('/app/views/common/UIShortcut'),
@@ -15,43 +15,43 @@ AppsCo.Controller.Try = (function () {
         Ti.API.info('Button Height is : ' + h);
         Ti.API.info('btn.abc : ' + btn.abc);
 
-        AppsCo.App.notty('OS['+ AppsCo.Device.osname +'] Version['+ AppsCo.Device.version +']');
-        AppsCo.App.notty('Width['+ AppsCo.Device.width +'] Height['+ AppsCo.Device.height +']');
-        AppsCo.App.notty((AppsCo.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
+        Como.App.notty('OS['+ Como.Device.osname +'] Version['+ Como.Device.version +']');
+        Como.App.notty('Width['+ Como.Device.width +'] Height['+ Como.Device.height +']');
+        Como.App.notty((Como.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
     };
 
     /**
      * Show login event will create a window and a form to login.
      */
     showLogin = function () {
-        AppsCo.App.notty('Showing Login Screen');
+        Como.App.notty('Showing Login Screen');
 
         (function () {
-            var users = AppsCo.Model.User.all();
-            AppsCo.App.notty(AppsCo.Model.User.info());
+            var users = Como.Model.User.all();
+            Como.App.notty(Como.Model.User.info());
             _.each(users, function(u) {
-                AppsCo.App.notty(u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
+                Como.App.notty('Found user' + u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
             });
         }());
 
         var scrolly = UI.scrolly({contentHeight:'auto'}),
-            win = UI.win(AppsCo.App.extend(
-                AppsCo.UI.win.common,
+            win = UI.win(Como.App.extend(
+                Como.UI.win.common,
                 {titleid: 'winLogin', backgroundColor: '#bada55'}
             )),
 
-            userInText = UI.textfield(AppsCo.App.extend(
-                AppsCo.UI.inputs.textfield,
+            userInText = UI.textfield(Como.App.extend(
+                Como.UI.inputs.textfield,
                 { id: 'userTxt', hintText: 'username', top: '20dp' }
             )),
 
-            passInText = UI.textfield(AppsCo.App.extend(
-                AppsCo.UI.inputs.textfield,
+            passInText = UI.textfield(Como.App.extend(
+                Como.UI.inputs.textfield,
                 { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
             )),
 
             loginBtn = UI.button(
-                AppsCo.UI.buttons.login,
+                Como.UI.buttons.login,
                 // Listen to tap events
                 'Try/doLogin', scrolly, win
             );
@@ -73,16 +73,16 @@ AppsCo.Controller.Try = (function () {
         var viewElt = view.getChildren(),
             userTxt = viewElt[0], passTxt = viewElt[1];
 
-        AppsCo.App.notty('username is ' + userTxt.value);
-        AppsCo.App.notty('password is ' + passTxt.value);
+        Como.App.notty('username is ' + userTxt.value);
+        Como.App.notty('password is ' + passTxt.value);
 
         // TODO validate user with server
 
         // assume validated
         (function () {
-            var userCount = AppsCo.Model.User.count(),
-                user = userCount > 0 ? AppsCo.Model.User.findOneBy('id', 1) :
-                    AppsCo.Model.User.newRecord({
+            var userCount = Como.Model.User.count(),
+                user = userCount > 0 ? Como.Model.User.findOneBy('id', 1) :
+                    Como.Model.User.newRecord({
                         id: 1, name: userTxt.value, pass: passTxt.value
                     });
 

@@ -25,7 +25,7 @@
             else {
                 applyFn = function (e) {
                     [].push.apply(args, [e]);
-                    AppsCo.App.act.apply(this, args);
+                    Como.App.act.apply(this, args);
                 };
             }
 

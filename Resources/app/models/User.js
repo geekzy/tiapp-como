@@ -1,4 +1,4 @@
-AppsCo.Model.User = (function () {
+Como.Model.User = (function () {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
@@ -32,7 +32,7 @@ AppsCo.Model.User = (function () {
             display: display
         };
 
-        return new AppsCo.joli.model(m);
+        return new Como.joli.model(m);
     };
 
     /**
@@ -48,9 +48,9 @@ AppsCo.Model.User = (function () {
     display = function () {
         var user = this,
             tmpl = _.template([
-                'Record[name => <%=name%>, ',
+                '[name => <%=name%>, ',
                 'pass => <%=pass%>, ',
-                'id => <%=id%>] method called'
+                'id => <%=id%>]'
             ].join(''));
         return tmpl(user);
     };
