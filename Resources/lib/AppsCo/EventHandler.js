@@ -1,6 +1,7 @@
 (function () {
 
-    var // common apply function for events
+    var _ = require('/lib/Underscore/underscore.min'),
+        // common apply function for events
         handlerFn,
         // UI Objects Collection to be extended
         uiObjects = [

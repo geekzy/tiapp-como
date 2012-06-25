@@ -1,6 +1,7 @@
-AppsCo.Module.Try = (function () {
+AppsCo.Controller.Try = (function () {
     "use strict";
-    var UI = require('/app/ui/common/UIShortcut'),
+    var _ = require('/lib/Underscore/underscore.min'),
+        UI = require('/app/views/common/UIShortcut'),
         doSave, showLogin, doLogin, doSwipe, doManual;
 
     /**
@@ -24,6 +25,15 @@ AppsCo.Module.Try = (function () {
      */
     showLogin = function () {
         AppsCo.App.notty('Showing Login Screen');
+
+        (function () {
+            var users = AppsCo.Model.User.all();
+            AppsCo.App.notty(AppsCo.Model.User.info());
+            _.each(users, function(u) {
+                AppsCo.App.notty(u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
+            });
+        }());
+
         var scrolly = UI.scrolly({contentHeight:'auto'}),
             win = UI.win(AppsCo.App.extend(
                 AppsCo.UI.win.common,
@@ -63,8 +73,25 @@ AppsCo.Module.Try = (function () {
         var viewElt = view.getChildren(),
             userTxt = viewElt[0], passTxt = viewElt[1];
 
-        AppsCo.App.notty("username is " + userTxt.value);
-        AppsCo.App.notty("password is " + passTxt.value);
+        AppsCo.App.notty('username is ' + userTxt.value);
+        AppsCo.App.notty('password is ' + passTxt.value);
+
+        // TODO validate user with server
+
+        // assume validated
+        (function () {
+            var userCount = AppsCo.Model.User.count(),
+                user = userCount > 0 ? AppsCo.Model.User.findOneBy('id', 1) :
+                    AppsCo.Model.User.newRecord({
+                        id: 1, name: userTxt.value, pass: passTxt.value
+                    });
+
+            if (userCount > 0) {
+                user.set('name', userTxt.value);
+                user.set('pass', passTxt.value);
+            }
+            user.save();
+        }());
 
         win.close();
     };

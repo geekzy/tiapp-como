@@ -3,24 +3,28 @@ var AppsCo = {
     // set device namespace
     Device: {},
     // set controller namespace
-    Module: {},
+    Controller: {},
     // set model namespace
     Model: {},
-    // ui component namespace
+    // ui (view) component namespace
     UI: {}
 };
 // set global App module
 AppsCo.App = (function () {
     "use strict";
-    var init, execute, notty, act, extend, applyAction;
+    var _ = require('/lib/Underscore/underscore.min'),
+        init, execute, notty, act, extend, applyAction;
 
     /**
      * Function to initialize globals
      */
     init = function () {
-        // get configurations
-        var cf = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, 'app/config/app.json').read(),
-            config = eval('(' + cf + ')');
+
+        var // load configurations
+            config = require('/app/config/app'),
+            // include joli ORM
+            joli = require('/lib/Joli/joli'),
+            joliApi = require('/lib/Joli/joli.api');
 
         AppsCo.config = config;
         AppsCo.mode = config.mode;
@@ -46,7 +50,7 @@ AppsCo.App = (function () {
         AppsCo.Device.locale = Ti.Platform.locale;
 
         // Create db Connection
-        joli.connection = new joli.Connection(AppsCo.config.db);
+        AppsCo.joli = joliApi(joli).connect(AppsCo.config.db);
     };
 
     /**

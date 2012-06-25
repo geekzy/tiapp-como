@@ -2,7 +2,7 @@
 // please include your UI components & assign listeners here
 (function () {
     // include components
-    var UI = require('/app/ui/common/UIShortcut');
+    var UI = require('/app/views/common/UIShortcut');
 
     // UI instances / vars
     var // create a window
