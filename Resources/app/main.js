@@ -4,6 +4,7 @@
     // include components
     var // UI instances / vars
         win = require('/app/views/common/mainWin')(Como);
+
     // open the window
     win.open();
 }());
