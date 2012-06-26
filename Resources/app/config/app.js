@@ -5,6 +5,12 @@ var config = {
     /** db name **/
     db: 'tiapp-exercise',
 
+    /** android tablet minimum form factor **/
+    tablet: {
+        width: 899,
+        height: 899
+    },
+
     /** Actions **/
     action: [
         {module: 'Try',     name: 'doSave',         path: 'Como.Controller.Try.doSave'},

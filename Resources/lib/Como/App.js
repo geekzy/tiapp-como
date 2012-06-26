@@ -46,7 +46,8 @@ Como.App = (function () {
         // Device is considered a tablet
         Como.Device.isTablet = Como.Device.ipad ||
             // decide what is considered to be a tablet form factor for android
-            (Como.Device.android && (Como.Device.width > 899 || Como.Device.height > 899));
+            (Como.Device.android && (Como.Device.width > Como.config.tablet.width
+                || Como.Device.height > Como.config.tablet.height));
 
         // Device Current State
         Como.Device.locale = Ti.Platform.locale;
@@ -114,7 +115,8 @@ Como.App = (function () {
         }
 
         // merge arguments with handler params
-        args = _.union(args, params);
+        //args = _.union(args, params);
+        [].push.apply(args, params);
         return execute.apply(this, args);
     };
 
@@ -127,11 +129,12 @@ Como.App = (function () {
     extend = function (defaults, opts/*, more objects to extend*/) {
         var args = [{}, defaults, opts],
             objs = Array.prototype.slice.call(arguments).splice(2);
-        return _.extend.apply(this, _.union(args, objs));
+        [].push.apply(args, objs);
+        return _.extend.apply(this, args);
     };
 
     /**
-     * Apply action path to a function configured at app.json config
+     * Apply action path to a function configured at /app/config/app.js config
      * @param {String} action the action path in to apply its function to
      */
     applyAction = function (action/*, args*/) {
