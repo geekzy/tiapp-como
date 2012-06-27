@@ -3,7 +3,7 @@ var config = {
     mode: 'DEV',
 
     /** db name **/
-    db: 'tiapp-exercise',
+    db: 'tiapp-como',
 
     /** android tablet minimum form factor **/
     tablet: {
