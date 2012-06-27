@@ -1,10 +1,9 @@
 function loginWin (C) {
-    C.App.notty('Showing Login Screen');
-
+    "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // include UI Helper module
-        UI = require('/lib/Como/UIShortcut'),
+        UI = require('/lib/Como/UIShortcut')(C),
         // get user count
         userCount = C.Model.User.count(),
         // get user if exists

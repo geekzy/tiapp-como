@@ -1,6 +1,6 @@
 Como.Controller.Try = (function () {
     "use strict";
-    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual;
+    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -82,11 +82,22 @@ Como.Controller.Try = (function () {
         Ti.API.info(e.source instanceof Ti.UI.Window);
 
     };
+
+    /**
+     * Example of action when choosing an option in Ti.UI.OptionDialog
+     * @param {Object} e an Event object related
+     */
+    doChoose = function(e) {
+        var src = e.source, _ = require('/lib/Underscore/underscore.min');
+        Ti.API.info('You selected option['+ e.index +']: '+ e.source.options[e.index]);
+    };
+
     return {
         doSave: doSave,
         showLogin: showLogin,
         doLogin: doLogin,
         doLogout: doLogout,
-        doManual: doManual
+        doManual: doManual,
+        doChoose: doChoose
     };
 }());
