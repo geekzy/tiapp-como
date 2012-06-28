@@ -1,4 +1,4 @@
-function loginWin (C) {
+function loginWin (C, trigBtn) {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
@@ -28,7 +28,7 @@ function loginWin (C) {
         loginBtn = UI.button(
             C.UI.buttons.login,
             // Listen to tap events
-            'Try/doLogin', scrolly, self
+            'Try/doLogin', scrolly, self, trigBtn
         ),
         winLogoutTitle = _.template(L('winLogout') + ' - <%=name%>');
 
@@ -58,7 +58,7 @@ function loginWin (C) {
                 { titleid: 'btnLogout', top: '20dp' }
             ),
         // Listen to tap event
-        'Try/doLogout', self);
+        'Try/doLogout', self, trigBtn);
         scrolly.add(loginBtn);
     }
     // add view into selfdow

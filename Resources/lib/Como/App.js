@@ -24,10 +24,13 @@ Como.App = (function () {
 
         var // load configurations
             config = require('/app/config/app'),
+            // include and load UI properties configuration
+            uiProps = require('/app/config/ui'),
             // include joli ORM
             joli = require('/lib/Joli/joli'),
             joliApi = require('/lib/Joli/joli.api');
 
+        Como.UI = uiProps;
         Como.config = config;
         Como.mode = config.mode;
         Como.action = config.action;
@@ -52,7 +55,7 @@ Como.App = (function () {
         // Device Current State
         Como.Device.locale = Ti.Platform.locale;
 
-        // Create db Connection
+        // Create db Connection and put into Como
         Como.joli = joliApi(joli).connect(Como.config.db);
     };
 

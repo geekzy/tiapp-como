@@ -10,6 +10,7 @@
     <string name="btnLogin">Login</string>
     <string name="btnLogout">Logout</string>
     <string name="btnChoose">Choose</string>
+    <string name="btnUser">User</string>
 
     <!-- Option Dialog -->
     <string name="optDlgTitle">Are you sure ?</string>

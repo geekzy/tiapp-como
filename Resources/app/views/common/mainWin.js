@@ -36,7 +36,10 @@ function mainWin (C) {
 
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
-    btnChoose.tap(function() { optDlg.show(); });
+    btnChoose.tap(function() {
+        optDlg.click('Try/doChoose');
+        optDlg.show();
+    });
     self.tap(function (e) {
         // prevent event bubbling from children's tap event
         if (e.source === self) {
@@ -45,9 +48,10 @@ function mainWin (C) {
             self.fireEvent('winTap', {p1: 'xxx'});
         }
     });
+
     // listen to click event
     btnLogin.click('Try/showLogin');
-    optDlg.click('Try/doChoose');
+
     // listen to custom event
     self.addEventListener('winTap', C.App.applyAction('Try/doManual', 'x', 1, true));
 

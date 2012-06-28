@@ -21,9 +21,10 @@ Como.Controller.Try = (function () {
     /**
      * Show login event will create a window and a form to login.
      */
-    showLogin = function () {
+    showLogin = function (e) {
         var // UI instances / vars
-            win = require('/app/views/common/loginWin')(Como);
+            btn = e.source,
+            win = require('/app/views/common/loginWin')(Como, btn);
         //  open it;
         win.open();
     };
@@ -31,7 +32,7 @@ Como.Controller.Try = (function () {
     /**
      * User login event handler
      */
-    doLogin = function (view, win) {
+    doLogin = function (view, win, btn) {
         var viewElt = view.getChildren(),
             userTxt = viewElt[0], passTxt = viewElt[1];
 
@@ -52,6 +53,8 @@ Como.Controller.Try = (function () {
                 user.set('name', userTxt.value);
                 user.set('pass', passTxt.value);
             }
+
+            btn.setTitle(L('btnUser'));
             user.save();
         }());
 
@@ -61,8 +64,9 @@ Como.Controller.Try = (function () {
     /**
      * User logout event handler
      */
-    doLogout = function (win) {
+    doLogout = function (win, btn) {
         Como.Model.User.truncate();
+        btn.setTitle(L('btnLogin'));
         win.close();
     };
 
