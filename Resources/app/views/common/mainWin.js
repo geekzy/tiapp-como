@@ -25,6 +25,10 @@ function mainWin (C) {
             C.UI.buttons.badass,
             { titleid: 'btnChoose', top: '140dp' }
         )),
+        btnAjax = UI.button(C.App.extend(
+            C.UI.buttons.badass,
+            { titleid: 'btnAjax', top: '200dp' }
+        )),
         // create option dialog
         optDlg = UI.optdialog({
           cancel: 1,
@@ -40,6 +44,7 @@ function mainWin (C) {
         optDlg.click('Try/doChoose');
         optDlg.show();
     });
+    btnAjax.tap('Try/doAjax');
     self.tap(function (e) {
         // prevent event bubbling from children's tap event
         if (e.source === self) {
@@ -59,6 +64,7 @@ function mainWin (C) {
     self.add(btnTest);
     self.add(btnLogin);
     self.add(btnChoose);
+    self.add(btnAjax);
 
     return self;
 }

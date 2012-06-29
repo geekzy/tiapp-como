@@ -150,10 +150,10 @@ Como.App = (function () {
 
     // Public Common (App) Scope Functions
     return {
-        init: init,
-        notty: notty,
-        act: act,
-        extend: extend,
+               init: init,
+              notty: notty,
+                act: act,
+             extend: extend,
         applyAction: applyAction
     };
 }());

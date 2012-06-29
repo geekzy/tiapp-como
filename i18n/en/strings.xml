@@ -11,6 +11,7 @@
     <string name="btnLogout">Logout</string>
     <string name="btnChoose">Choose</string>
     <string name="btnUser">User</string>
+    <string name="btnAjax">Ajax</string>
 
     <!-- Option Dialog -->
     <string name="optDlgTitle">Are you sure ?</string>

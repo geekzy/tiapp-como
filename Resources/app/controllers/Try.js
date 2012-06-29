@@ -1,6 +1,6 @@
 Como.Controller.Try = (function () {
     "use strict";
-    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose;
+    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -83,6 +83,7 @@ Como.Controller.Try = (function () {
         Ti.API.info('s = ' + s);
         Ti.API.info('n = ' + n);
         Ti.API.info('b = ' + b);
+        Ti.API.info('p1 = ' + e.p1);
         Ti.API.info(e.source instanceof Ti.UI.Window);
 
     };
@@ -91,17 +92,36 @@ Como.Controller.Try = (function () {
      * Example of action when choosing an option in Ti.UI.OptionDialog
      * @param {Object} e an Event object related
      */
-    doChoose = function(e) {
+    doChoose = function (e) {
         var src = e.source, _ = require('/lib/Underscore/underscore.min');
+        Ti.API.info(_.keys(e));
         Ti.API.info('You selected option['+ e.index +']: '+ e.source.options[e.index]);
     };
 
+    /**
+     * Example of action demonstrating HttpClient request
+     */
+    doAjax = function () {
+        var $ = require('/lib/Como/Utils');
+        $.ajax({
+            url: 'http://110.74.169.145/educonnect/login.php',
+            data: {login: 'student', pass: 'student', plain: 1},
+            success: function(resp) {
+                // default dataType is json so resp is already js object
+                Ti.API.info(resp);
+                // use this ref for raw response data
+                Ti.API.info(this.responseText);
+            }
+        });
+    };
+
     return {
-        doSave: doSave,
+           doSave: doSave,
         showLogin: showLogin,
-        doLogin: doLogin,
-        doLogout: doLogout,
-        doManual: doManual,
-        doChoose: doChoose
+          doLogin: doLogin,
+         doLogout: doLogout,
+         doManual: doManual,
+         doChoose: doChoose,
+           doAjax: doAjax
     };
 }());
