@@ -7,7 +7,7 @@
         <target device="blackberry">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>2.0.3.v20120605111708</sdk-version>
+    <sdk-version>2.1.0.GA</sdk-version>
     <id>biz.appsco.mobile.ti.tiappcomo</id>
     <name>tiapp-como</name>
     <version>1.0</version>

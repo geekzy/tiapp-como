@@ -3,7 +3,7 @@
     <!-- Windows -->
     <string name="winMain">Main Window</string>
     <string name="winLogin">User Login</string>
-    <string name="winLogout">User Logout</string>
+    <string name="winUser">User</string>
 
     <!-- Buttons -->
     <string name="btnTest">Tap Me!</string>
@@ -12,6 +12,7 @@
     <string name="btnChoose">Choose</string>
     <string name="btnUser">User</string>
     <string name="btnAjax">Ajax</string>
+    <string name="btnSwipe">Swipe Me</string>
 
     <!-- Option Dialog -->
     <string name="optDlgTitle">Are you sure ?</string>

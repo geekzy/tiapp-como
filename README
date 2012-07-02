@@ -1,10 +1,18 @@
 Como - a Titanium Appcelerator MVC Framework
 
-v1.0
+v1.0.3
 
 required:
-- joli.js - ORM
+- joli.js - Local DB ORM
 - underscore.js - JS Utility-Belt
+
+Change Log
+----------
+[25/06/12] - Initial Release of Como MVC Framework.
+[26/06/12] - Move tablet form factor to config, Remove unused image folder.
+[29/06/12] - Add Utility Module in /lib/Como/Utils.js to add HTTPClient utility.
+[02/07/12] - Fix to avoid Closure while applying action handler function.
+             Move utility Function in Como/App.js into Como/Utils.js.
 
 ----------------------------------
 Copyright (c) 2012 by AppsCo.biz

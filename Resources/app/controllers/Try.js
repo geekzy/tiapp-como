@@ -1,6 +1,11 @@
 Como.Controller.Try = (function () {
     "use strict";
-    var doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax;
+    var // include underscore utility-belt
+        _ = require('/lib/Underscore/underscore.min'),
+        // include Como Utility
+        $ = require('/lib/Como/Utils'),
+        // Controller methods/actions
+        doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -13,9 +18,9 @@ Como.Controller.Try = (function () {
         Ti.API.info('Button Height is : ' + h);
         Ti.API.info('btn.abc : ' + btn.abc);
 
-        Como.App.notty('OS['+ Como.Device.osname +'] Version['+ Como.Device.version +']');
-        Como.App.notty('Width['+ Como.Device.width +'] Height['+ Como.Device.height +']');
-        Como.App.notty((Como.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
+        $.notty('OS['+ Como.Device.osname +'] Version['+ Como.Device.version +']');
+        $.notty('Width['+ Como.Device.width +'] Height['+ Como.Device.height +']');
+        $.notty((Como.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
     };
 
     /**
@@ -36,29 +41,23 @@ Como.Controller.Try = (function () {
         var viewElt = view.getChildren(),
             userTxt = viewElt[0], passTxt = viewElt[1];
 
-        Como.App.notty('username is ' + userTxt.value);
-        Como.App.notty('password is ' + passTxt.value);
-
-        // TODO validate user with server
-
-        // assume validated
-        (function () {
-            var userCount = Como.Model.User.count(),
-                user = userCount > 0 ? Como.Model.User.findOneBy('id', 1) :
+        Ti.UI.Android.hideSoftKeyboard();
+        $.ajax({
+            url: 'http://110.74.169.145/educonnect/login.php',
+            data: {login: userTxt.value, pass: passTxt.value, plain: 1},
+            success: function(usr) {
+                // auth success
+                if (!usr.fail) {
                     Como.Model.User.newRecord({
                         id: 1, name: userTxt.value, pass: passTxt.value
-                    });
-
-            if (userCount > 0) {
-                user.set('name', userTxt.value);
-                user.set('pass', passTxt.value);
+                    }).save();
+                    btn.setTitle(L('btnUser'));
+                    win.close();
+                }
+                // auth failed
+                else { $.notty('Incorrect Username or Password'); }
             }
-
-            btn.setTitle(L('btnUser'));
-            user.save();
-        }());
-
-        win.close();
+        });
     };
 
     /**
@@ -79,13 +78,11 @@ Como.Controller.Try = (function () {
      * @param {Object} e an Event object related
      */
     doManual = function(s, n, b, e) {
-
         Ti.API.info('s = ' + s);
         Ti.API.info('n = ' + n);
         Ti.API.info('b = ' + b);
         Ti.API.info('p1 = ' + e.p1);
         Ti.API.info(e.source instanceof Ti.UI.Window);
-
     };
 
     /**
@@ -93,7 +90,7 @@ Como.Controller.Try = (function () {
      * @param {Object} e an Event object related
      */
     doChoose = function (e) {
-        var src = e.source, _ = require('/lib/Underscore/underscore.min');
+        var src = e.source;
         Ti.API.info(_.keys(e));
         Ti.API.info('You selected option['+ e.index +']: '+ e.source.options[e.index]);
     };
@@ -102,7 +99,6 @@ Como.Controller.Try = (function () {
      * Example of action demonstrating HttpClient request
      */
     doAjax = function () {
-        var $ = require('/lib/Como/Utils');
         $.ajax({
             url: 'http://110.74.169.145/educonnect/login.php',
             data: {login: 'student', pass: 'student', plain: 1},
@@ -111,8 +107,17 @@ Como.Controller.Try = (function () {
                 Ti.API.info(resp);
                 // use this ref for raw response data
                 Ti.API.info(this.responseText);
+
+                alert(resp.fname);
             }
         });
+    };
+
+    /**
+     * Example of action when swiping a component
+     */
+    doSwipe = function (e) {
+        alert('You swiped ' + e.direction + '!');
     };
 
     return {
@@ -122,6 +127,7 @@ Como.Controller.Try = (function () {
          doLogout: doLogout,
          doManual: doManual,
          doChoose: doChoose,
-           doAjax: doAjax
+           doAjax: doAjax,
+          doSwipe: doSwipe
     };
 }());

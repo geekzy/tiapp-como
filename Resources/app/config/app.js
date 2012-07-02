@@ -1,4 +1,5 @@
-var config = {
+/* Application Framework scoped Configuration */
+module.exports = {
     /** app mode **/
     mode: 'DEV',
 
@@ -18,8 +19,7 @@ var config = {
         {module: 'Try',     name: 'doLogin',        path: 'Como.Controller.Try.doLogin'},
         {module: 'Try',     name: 'doLogout',       path: 'Como.Controller.Try.doLogout'},
         {module: 'Try',     name: 'doChoose',       path: 'Como.Controller.Try.doChoose'},
-        {module: 'Try',     name: 'doAjax',         path: 'Como.Controller.Try.doAjax'}
+        {module: 'Try',     name: 'doAjax',         path: 'Como.Controller.Try.doAjax'},
+        {module: 'Try',     name: 'doSwipe',        path: 'Como.Controller.Try.doSwipe'}
     ]
 };
-
-module.exports = config;

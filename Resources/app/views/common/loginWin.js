@@ -2,25 +2,28 @@ function loginWin (C, trigBtn) {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
+        // include Como Utility
+        $ = require('/lib/Como/Utils'),
         // include UI Helper module
         UI = require('/lib/Como/UIShortcut')(C),
+
         // get user count
         userCount = C.Model.User.count(),
         // get user if exists
         user = userCount > 0 ? C.Model.User.findOneBy('id', 1) : false,
 
         scrolly = UI.scrolly({contentHeight:'auto'}),
-        self = UI.win(C.App.extend(
+        self = UI.win($.extend(
             C.UI.win.common,
             {titleid: 'winLogin', backgroundColor: '#bada55'}
         )),
 
-        userInText = UI.textfield(C.App.extend(
+        userInText = UI.textfield($.extend(
             C.UI.inputs.textfield,
             { id: 'userTxt', hintText: 'username', top: '20dp' }
         )),
 
-        passInText = UI.textfield(C.App.extend(
+        passInText = UI.textfield($.extend(
             C.UI.inputs.textfield,
             { id:  'passTxt', hintText: 'password', top: '70dp', passwordMask: true }
         )),
@@ -30,14 +33,14 @@ function loginWin (C, trigBtn) {
             // Listen to tap events
             'Try/doLogin', scrolly, self, trigBtn
         ),
-        winLogoutTitle = _.template(L('winLogout') + ' - <%=name%>');
+        winLogoutTitle = _.template(L('winUser') + ' - <%=name%>');
 
     (function () {
         var users = C.Model.User.all();
-        C.App.notty(C.Model.User.info());
+        $.notty(C.Model.User.info());
         if (userCount > 0) {
             _.each(users, function(u) {
-                C.App.notty('Found user' + u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
+                $.notty('Found user' + u.display(), Ti.UI.NOTIFICATION_DURATION_LONG);
             });
         }
 
@@ -53,7 +56,7 @@ function loginWin (C, trigBtn) {
     // got user
     else {
         self.setTitle(winLogoutTitle(user));
-        loginBtn = UI.button(C.App.extend(
+        loginBtn = UI.button($.extend(
                 C.UI.buttons.login,
                 { titleid: 'btnLogout', top: '20dp' }
             ),

@@ -2,32 +2,41 @@ function mainWin (C) {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
+        // include Como Utility
+        $ = require('/lib/Como/Utils'),
         // include UI Helper module
         UI = require('/lib/Como/UIShortcut')(C),
 
+        // get user count
+        loggedin = C.Model.User.count() > 0,
+
         // create a selfdow
-        self = UI.win(C.App.extend(
+        self = UI.win($.extend(
             // base (common) attributes
             C.UI.win.common,
             // cuctom attributes
             { titleid: 'winMain', exitOnClose: true }
         )),
         // create a button
-        btnTest = UI.button(C.App.extend(
+        btnTest = UI.button($.extend(
             C.UI.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
-        btnLogin = UI.button(C.App.extend(
+        btnLogin = UI.button($.extend(
             C.UI.buttons.badass,
-            { titleid: 'btnLogin', top: '80dp' }
+            { titleid: (loggedin ? 'btnUser' : 'btnLogin'), top: '80dp' }
         )),
-        btnChoose = UI.button(C.App.extend(
+        btnChoose = UI.button($.extend(
             C.UI.buttons.badass,
             { titleid: 'btnChoose', top: '140dp' }
         )),
-        btnAjax = UI.button(C.App.extend(
+        btnAjax = UI.button($.extend(
             C.UI.buttons.badass,
             { titleid: 'btnAjax', top: '200dp' }
+        )),
+        btnSwipe = UI.button($.extend(
+            C.UI.buttons.badass,
+            { titleid: 'btnSwipe', top: '260dp' }
         )),
         // create option dialog
         optDlg = UI.optdialog({
@@ -45,12 +54,14 @@ function mainWin (C) {
         optDlg.show();
     });
     btnAjax.tap('Try/doAjax');
-    self.tap(function (e) {
+    btnSwipe.addEventListener('swipe', C.App.applyAction('Try/doSwipe'));
+    self.taphold(function (e) {
         // prevent event bubbling from children's tap event
         if (e.source === self) {
             Ti.API.info('Window Tapped!');
             // fire custom event
-            self.fireEvent('winTap', {p1: 'xxx'});
+            var x = Math.round(Math.random()) === 1;
+            self.fireEvent('winTap', {p1: x ? 'xxx' : 'yyy'});
         }
     });
 
@@ -65,6 +76,7 @@ function mainWin (C) {
     self.add(btnLogin);
     self.add(btnChoose);
     self.add(btnAjax);
+    self.add(btnSwipe);
 
     return self;
 }

@@ -15,7 +15,7 @@ Como.App = (function () {
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // Como.App utility methods
-        init, execute, notty, act, extend, applyAction;
+        init, execute, act, applyAction;
 
     /**
      * Function to initialize globals
@@ -78,17 +78,6 @@ Como.App = (function () {
     };
 
     /**
-     * Function to show notification
-     * @param {String} msg the message to notify
-     */
-    notty = function (msg, duration) {
-        Ti.UI.createNotification({
-            message: msg || '',
-            duration: duration || Ti.UI.NOTIFICATION_DURATION_SHORT
-        }).show();
-    };
-
-    /**
      * Function to trigger action
      * @param {String} fexp the action path in configuration
      */
@@ -124,36 +113,20 @@ Como.App = (function () {
     };
 
     /**
-     * Proxying underscore's object extend function
-     * to preserve defaults
-     * @param {Object} defaults the base object to apply to
-     * @param {Object} opts the custom attributes to apply to base (defaults)
-     */
-    extend = function (defaults, opts/*, more objects to extend*/) {
-        var args = [{}, defaults, opts],
-            objs = Array.prototype.slice.call(arguments).splice(2);
-        [].push.apply(args, objs);
-        return _.extend.apply(this, args);
-    };
-
-    /**
      * Apply action path to a function configured at /app/config/app.js config
      * @param {String} action the action path in to apply its function to
      */
     applyAction = function (action/*, args*/) {
-        var args = arguments;
+        var args = Array.prototype.slice.call(arguments).splice(1);
         return function (e) {
-            [].push.apply(args, [e]);
-            act.apply(this, args);
+            act.apply(this, _.union([action], args, [e]));
         };
     }
 
     // Public Common (App) Scope Functions
     return {
                init: init,
-              notty: notty,
                 act: act,
-             extend: extend,
         applyAction: applyAction
     };
 }());
