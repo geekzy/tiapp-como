@@ -142,7 +142,39 @@ function UIShortcut(Como) {
          * @param {String} tapAct the action name apply to the UI tap event
          * @return {Object} the Titanium.UI.OptionDialog instance
          */
-        optdialog: createUI(Ti.UI.createOptionDialog)
+        optdialog: createUI(Ti.UI.createOptionDialog),
+
+        /**
+         * Shortcut for Titanium.UI.TableView creation using Ti.UI.createTableView as factory
+         * @param {Object} opts the options for the UI
+         * @param {String} tapAct the action name apply to the UI tap event
+         * @return {Object} the Titanium.UI.TableView instance
+         */
+        tableview: createUI(Ti.UI.createTableView),
+
+        /**
+         * Shortcut for Titanium.UI.TableViewRow creation using Ti.UI.createTableViewRow as factory
+         * @param {Object} opts the options for the UI
+         * @param {String} tapAct the action name apply to the UI tap event
+         * @return {Object} the Titanium.UI.TableViewRow instance
+         */
+        tablerow: createUI(Ti.UI.createTableViewRow),
+
+        /**
+         * Shortcut for Titanium.UI.TableViewSection creation using Ti.UI.createTableViewSection as factory
+         * @param {Object} opts the options for the UI
+         * @param {String} tapAct the action name apply to the UI tap event
+         * @return {Object} the Titanium.UI.TableViewSection instance
+         */
+        tablesection: createUI(Ti.UI.createTableViewSection),
+
+        /**
+         * Shortcut for Titanium.UI.ProgressBar creation using Ti.UI.createProgressBar as factory
+         * @param {Object} opts the options for the UI
+         * @param {String} tapAct the action name apply to the UI tap event
+         * @return {Object} the Titanium.UI.ProgressBar instance
+         */
+        progressbar: createUI(Ti.UI.createProgressBar)
     };
 };
 

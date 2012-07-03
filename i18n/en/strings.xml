@@ -13,10 +13,14 @@
     <string name="btnUser">User</string>
     <string name="btnAjax">Ajax</string>
     <string name="btnSwipe">Swipe Me</string>
+    <string name="btnDownload">Download</string>
 
     <!-- Option Dialog -->
     <string name="optDlgTitle">Are you sure ?</string>
     <string name="optConfirm">Confirm</string>
     <string name="optCancel">Cancel</string>
     <string name="optHelp">Help</string>
+
+    <!-- Other Messages -->
+    <string name="msgDownload">Downloading...</string>
 </resources>

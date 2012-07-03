@@ -2,11 +2,12 @@ module.exports = (function () {
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // utilities interface
-        emptyFn = function () {}, ajaxChangeEvt = 'ajax:change',
+        emptyFn = function () {},
         ajax, notty, extend;
 
     ajax = function (o) {
-        var xhr, xhropt = {}, change, onload, onerror,
+        var xhr, xhropt = {}, change, onload, onerror, download, upload,
+            ajaxChangeEvt = 'ajax:change', ajaxDlEvt = 'ajax:download', ajaxUpEvt = 'ajax:upload',
             opt = _.extend({
                 url: '#', data: {},
                 type: 'GET',
@@ -30,8 +31,11 @@ module.exports = (function () {
                 status = this.statusText;
 
             if (!opt.progress) { progressUI.hide(); }
-            else if (opt.progress.fireEvent) {
-                opt.progress.fireEvent(ajaxChangeEvt, {complete: true});
+            else if (opt.progress.hide) {
+                opt.progress.hide();
+                if (opt.progress.fireEvent) {
+                    opt.progress.fireEvent(ajaxChangeEvt, {complete: true});
+                }
             }
 
             resp = opt.dataType === 'json' ? JSON.parse(resp) : resp
@@ -44,9 +48,11 @@ module.exports = (function () {
                 status = this.statusText;
 
             if (!opt.progress) { progressUI.hide(); }
-            else if (opt.progress.fireEvent) {
-                e.failure = true;
-                opt.progress.fireEvent(ajaxChangeEvt, {failure: true});
+            else if (opt.progress.hide) {
+                opt.progress.hide();
+                if (opt.progress.fireEvent) {
+                    opt.progress.fireEvent(ajaxChangeEvt, {failure: true});
+                }
             }
 
             resp = opt.dataType === 'json' ? JSON.parse(resp) : resp
@@ -85,11 +91,37 @@ module.exports = (function () {
             opt.change.apply(this, [progress, state]);
         };
 
+        download = function(e) {
+            var progress = e.progress, state = this.readyState;
+            // update defined progress value
+            if (opt.progress) {
+                if (opt.progress.value) { opt.progress.value = progress; }
+                // fire event to update progress
+                if (opt.progress.fireEvent) { opt.progress.fireEvent(ajaxDlEvt, {progress: progress}); }
+            }
+
+            // call user's callback
+            opt.download.apply(this, [progress, state]);
+        };
+
+        upload = function(e) {
+            var progress = e.progress, state = this.readyState;
+            // update defined progress value
+            if (opt.progress) {
+                if (opt.progress.value) { opt.progress.value = progress; }
+                // fire event to update progress
+                if (opt.progress.fireEvent) { opt.progress.fireEvent(ajaxUpEvt, {progress: progress}); }
+            }
+
+            // call user's callback
+            opt.upload.apply(this, [progress, state]);
+        };
+
         xhropt.onload = onload;
         xhropt.onerror = onerror;
         xhropt.onreadystatechange = change;
-        xhropt.ondatastream = opt.download;
-        xhropt.onsendstream = opt.upload;
+        xhropt.ondatastream = download;
+        xhropt.onsendstream = upload;
 
         xhr = Ti.Network.createHTTPClient(xhropt);
 

@@ -5,7 +5,8 @@ Como.Controller.Try = (function () {
         // include Como Utility
         $ = require('/lib/Como/Utils'),
         // Controller methods/actions
-        doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe;
+        doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe,
+        doDownload;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -114,6 +115,18 @@ Como.Controller.Try = (function () {
     };
 
     /**
+     * Example of action demonstrating HttpClient request for Downloading
+     */
+    doDownload = function (pbar) {
+        $.ajax({
+            url: 'http://geekzy.net/share/Rhogen.with.Sencha_for_Rhodes.3.3.1.zip',
+            //url: 'http://geekzy.net/share/movie-list.txt',
+            dataType: 'plain',
+            progress: pbar
+        });
+    };
+
+    /**
      * Example of action when swiping a component
      */
     doSwipe = function (e) {
@@ -128,6 +141,7 @@ Como.Controller.Try = (function () {
          doManual: doManual,
          doChoose: doChoose,
            doAjax: doAjax,
-          doSwipe: doSwipe
+          doSwipe: doSwipe,
+       doDownload: doDownload
     };
 }());
