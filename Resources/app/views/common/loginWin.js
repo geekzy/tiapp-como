@@ -55,7 +55,7 @@ function loginWin (C, trigBtn) {
     }
     // got user
     else {
-        self.setTitle(winLogoutTitle(user));
+        self.titleid = 'winUser';
         loginBtn = UI.button($.extend(
                 C.UI.buttons.login,
                 { titleid: 'btnLogout', top: '20dp' }

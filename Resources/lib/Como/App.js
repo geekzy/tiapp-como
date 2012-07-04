@@ -7,7 +7,9 @@ var Como = {
     // set model namespace
     Model: {},
     // ui (view) component namespace
-    UI: {}
+    UI: {},
+    // app status namespace
+    Status: {}
 };
 // set global App module
 Como.App = (function () {
@@ -30,6 +32,7 @@ Como.App = (function () {
             joli = require('/lib/Joli/joli'),
             joliApi = require('/lib/Joli/joli.api');
 
+        // Put configs and UI properties into Como
         Como.UI = uiProps;
         Como.config = config;
         Como.mode = config.mode;
@@ -52,7 +55,7 @@ Como.App = (function () {
             (Como.Device.android && (Como.Device.width > Como.config.tablet.width
                 || Como.Device.height > Como.config.tablet.height));
 
-        // Device Current State
+        // Device Current Locale
         Como.Device.locale = Ti.Platform.locale;
 
         // Create db Connection and put into Como

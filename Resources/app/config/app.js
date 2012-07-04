@@ -6,6 +6,9 @@ module.exports = {
     /** db name **/
     db: 'tiapp-como',
 
+    /** sdcard location **/
+    sdcard: 'file:///mnt/sdcard/',
+
     /** android tablet minimum form factor **/
     tablet: {
         width: 899,

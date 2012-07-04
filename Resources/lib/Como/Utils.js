@@ -1,10 +1,14 @@
 module.exports = (function () {
+    "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // utilities interface
         emptyFn = function () {},
-        ajax, notty, extend;
+        ajax, notty, extend, filenameOfURL;
 
+    /**
+     * Create a HTTP Client for accessing remote HTTP service
+     */
     ajax = function (o) {
         var xhr, xhropt = {}, change, onload, onerror, download, upload,
             ajaxChangeEvt = 'ajax:change', ajaxDlEvt = 'ajax:download', ajaxUpEvt = 'ajax:upload',
@@ -15,7 +19,8 @@ module.exports = (function () {
                 success: emptyFn, failure: emptyFn,
                 download: emptyFn, upload: emptyFn,
                 change: emptyFn,
-                showProgress: true/*,
+                showProgress: true,
+                sync: false/*,
                 progess: <the progress bar to be notified>*/
             }, o || {}),
             // default progress bar
@@ -26,6 +31,9 @@ module.exports = (function () {
                 value: 0
             });
 
+        /**
+         * success method
+         */
         onload = function (e) {
             var resp = this.responseText,
                 status = this.statusText;
@@ -43,6 +51,9 @@ module.exports = (function () {
             opt.success.apply(this, [resp, status]);
         };
 
+        /**
+         * failure method
+         */
         onerror = function (e) {
             var resp = this.responseText,
                 status = this.statusText;
@@ -60,6 +71,9 @@ module.exports = (function () {
             opt.failure.apply(this, [resp, status]);
         };
 
+        /**
+         * ready state changed method
+         */
         change = function (e) {
             var progress = 0, state = this.readyState;
             switch (state) {
@@ -91,6 +105,9 @@ module.exports = (function () {
             opt.change.apply(this, [progress, state]);
         };
 
+        /**
+         * data stream method
+         */
         download = function(e) {
             var progress = e.progress, state = this.readyState;
             // update defined progress value
@@ -104,6 +121,9 @@ module.exports = (function () {
             opt.download.apply(this, [progress, state]);
         };
 
+        /**
+         * send stream method
+         */
         upload = function(e) {
             var progress = e.progress, state = this.readyState;
             // update defined progress value
@@ -117,23 +137,30 @@ module.exports = (function () {
             opt.upload.apply(this, [progress, state]);
         };
 
+        // Assign callbacks
         xhropt.onload = onload;
         xhropt.onerror = onerror;
         xhropt.onreadystatechange = change;
         xhropt.ondatastream = download;
         xhropt.onsendstream = upload;
 
+        // create the HTTPClient Object
         xhr = Ti.Network.createHTTPClient(xhropt);
 
         // show progress view
         if (!opt.progress) { progressUI.show(); }
         else if (opt.progress.show) { opt.progress.show(); }
 
-        xhr.open(opt.type, opt.url);
+        // Open Remote Connection
+        xhr.open(opt.type, opt.url, !opt.sync);
+        // Call Remote
         xhr.send(opt.data);
         return xhr;
     };
 
+    /**
+     * Function to show notification
+     */
     notty = function (msg, duration) {
         Ti.UI.createNotification({
             message: msg || '',
@@ -141,11 +168,22 @@ module.exports = (function () {
         }).show();
     };
 
+    /**
+     * Proxying underscore's object extend function to preserve defaults
+     */
     extend = function (defaults, opts/*, more objects to extend*/) {
         var args = [{}, defaults, opts],
             objs = Array.prototype.slice.call(arguments).splice(2);
         [].push.apply(args, objs);
         return _.extend.apply(this, args);
+    };
+
+    /**
+     * Get Filename of URL (last item of url)
+     */
+    filenameOfURL = function (url) {
+        var chunk = url.split('/');
+        return chunk.splice(chunk.length-1).join('');
     };
 
     return {
@@ -181,6 +219,13 @@ module.exports = (function () {
          * @param {Object} opts the custom attributes to apply to base (defaults)
          * @return {Object} the final merged/extended object
          */
-        extend: extend
+        extend: extend,
+
+        /**
+         * Get Filename of URL (last item of url)
+         * @param {String} url The URL to get its filename
+         * @return {String} the filename of the URL
+         */
+        filenameOfURL: filenameOfURL
     };
 }());

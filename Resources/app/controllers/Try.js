@@ -119,10 +119,17 @@ Como.Controller.Try = (function () {
      */
     doDownload = function (pbar) {
         $.ajax({
-            url: 'http://geekzy.net/share/Rhogen.with.Sencha_for_Rhodes.3.3.1.zip',
-            //url: 'http://geekzy.net/share/movie-list.txt',
+            //url: 'http://geekzy.net/share/Rhogen.with.Sencha_for_Rhodes.3.3.1.zip',
+            url: 'http://geekzy.net/share/movie-list.txt',
             dataType: 'plain',
-            progress: pbar
+            progress: pbar,
+            success: function () {
+                var filename = $.filenameOfURL(this.location),
+                    file = Titanium.Filesystem.getFile(Como.config.sdcard, filename);
+
+                file.write(this.responseData);
+                pbar.value = 0;
+            }
         });
     };
 
