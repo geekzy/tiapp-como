@@ -4,7 +4,7 @@ module.exports = (function () {
         _ = require('/lib/Underscore/underscore.min'),
         // utilities interface
         emptyFn = function () {},
-        ajax, notty, extend, filenameOfURL;
+        ajax, notty, extend, deviceOnline, filenameOfURL;
 
     /**
      * Create a HTTP Client for accessing remote HTTP service
@@ -186,6 +186,13 @@ module.exports = (function () {
         return chunk.splice(chunk.length-1).join('');
     };
 
+    /**
+     * Check if device is online
+     */
+    deviceOnline = function() {
+        return Ti.Network.online;
+    };
+
     return {
          /**
           * Create a HTTP Client for accessing remote HTTP service
@@ -226,6 +233,12 @@ module.exports = (function () {
          * @param {String} url The URL to get its filename
          * @return {String} the filename of the URL
          */
-        filenameOfURL: filenameOfURL
+        filenameOfURL: filenameOfURL,
+
+        /**
+         * Check if device is online
+         * @return device connectivity status, true - online; false - offline
+         */
+        deviceOnline: deviceOnline
     };
 }());

@@ -45,6 +45,10 @@ module.exports = function (C) {
             C.UI.buttons.badass,
             { titleid: 'btnDownload', top: '320dp' }
         )),
+        btnCheckOnline = UI.button($.extend(
+            C.UI.buttons.badass,
+            { titleid: 'btnCheckOnline', top: '380dp' }
+        )),
         // create option dialog
         optDlg = UI.optdialog({
           cancel: 1,
@@ -65,6 +69,7 @@ module.exports = function (C) {
     });
     btnAjax.tap('Try/doAjax');
     btnDownload.tap('Try/doDownload', progress);
+    btnCheckOnline.tap('Try/doCheckOnline');
     btnSwipe.swipe('Try/doSwipe');
     scrolly.taphold(function (e) {
         // prevent event bubbling from children's tap event
@@ -96,6 +101,7 @@ module.exports = function (C) {
     scrolly.add(btnSwipe);
     scrolly.add(btnDownload);
     scrolly.add(progress);
+    scrolly.add(btnCheckOnline);
     self.add(scrolly);
 
     return self;

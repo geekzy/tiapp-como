@@ -14,6 +14,7 @@
     <string name="btnAjax">Ajax</string>
     <string name="btnSwipe">Swipe Me</string>
     <string name="btnDownload">Download</string>
+    <string name="btnCheckOnline">Check Online</string>
 
     <!-- Option Dialog -->
     <string name="optDlgTitle">Are you sure ?</string>

@@ -6,7 +6,7 @@ Como.Controller.Try = (function () {
         $ = require('/lib/Como/Utils'),
         // Controller methods/actions
         doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe,
-        doDownload;
+        doDownload, doCheckOnline;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -140,15 +140,24 @@ Como.Controller.Try = (function () {
         alert('You swiped ' + e.direction + '!');
     };
 
+    /**
+     * Example of action to check device's connectivity
+     */
+    doCheckOnline = function() {
+        var online = $.deviceOnline();
+        alert('Device is ' + (online ? 'ONLINE' : 'OFFLINE') + '.');
+    }
+
     return {
-           doSave: doSave,
-        showLogin: showLogin,
-          doLogin: doLogin,
-         doLogout: doLogout,
-         doManual: doManual,
-         doChoose: doChoose,
-           doAjax: doAjax,
-          doSwipe: doSwipe,
-       doDownload: doDownload
+               doSave: doSave,
+            showLogin: showLogin,
+              doLogin: doLogin,
+             doLogout: doLogout,
+             doManual: doManual,
+             doChoose: doChoose,
+               doAjax: doAjax,
+              doSwipe: doSwipe,
+           doDownload: doDownload,
+        doCheckOnline: doCheckOnline
     };
 }());
