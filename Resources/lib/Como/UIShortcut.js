@@ -23,9 +23,7 @@ function UIShortcut(Como) {
                         if (_.size(args) === 0) { applyFn = function () {}; }
                         else {
                             // the event handler for the specified event name
-                            applyFn = function (e) {
-                                Como.App.act.apply(this, _.union(args, [e]));
-                            };
+                            applyFn = Como.applyAction.apply(this, args);
                         }
                         // add listener of event name with the specified handler
                         this.addEventListener(evtName, inline ? args[0] : applyFn);
@@ -178,4 +176,8 @@ function UIShortcut(Como) {
     };
 };
 
-module.exports = UIShortcut;
+module.exports = (function () {
+    return {
+        init: function (Como) { return UIShortcut(Como); }
+    };
+}());

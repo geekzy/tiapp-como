@@ -4,7 +4,7 @@ module.exports = (function () {
         _ = require('/lib/Underscore/underscore.min'),
         // utilities interface
         emptyFn = function () {},
-        ajax, notty, extend, deviceOnline, filenameOfURL;
+        ajax, notty, extend, deviceOnline, filenameOfURL, execute;
 
     /**
      * Create a HTTP Client for accessing remote HTTP service
@@ -193,6 +193,22 @@ module.exports = (function () {
         return Ti.Network.online;
     };
 
+    /**
+     * Execute a function within a context
+     */
+    execute = function (fnName, context /*, args */) {
+        var i, args = Array.prototype.slice.call(arguments).splice(2),
+            namespaces = fnName.split("."),
+            func = namespaces.pop(),
+            ctx = context || window;
+
+        for(i = 0; i < namespaces.length; i += 1) {
+            ctx = ctx[namespaces[i]];
+        }
+
+        return ctx[func].apply(this, args);
+    };
+
     return {
          /**
           * Create a HTTP Client for accessing remote HTTP service
@@ -239,6 +255,13 @@ module.exports = (function () {
          * Check if device is online
          * @return device connectivity status, true - online; false - offline
          */
-        deviceOnline: deviceOnline
+        deviceOnline: deviceOnline,
+
+        /**
+         * Execute a function within a context
+         * @param {String} functionName the function name/path
+         * @param {Object} context the context of the function to execute
+         */
+        execute: execute
     };
 }());
