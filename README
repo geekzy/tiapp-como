@@ -1,6 +1,6 @@
 Como - a Titanium Appcelerator MVC Framework
 
-v2.0.0
+v1.0.3
 
 required:
 - joli.js - Local DB ORM
@@ -16,8 +16,6 @@ Change Log
 [03/07/12] - Add download file demo using custom progress bar UI.
              Wrap ajax download/upload callback into ondatatream/onsendstream
              Add more UI factory on UIShortcut.js
-[13/07/12] - Initial Major changes.
-             Restructure baseline code to follow CommonJS pattern.
 
 ----------------------------------
 Copyright (c) 2012 by AppsCo.biz

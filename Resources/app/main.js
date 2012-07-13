@@ -2,16 +2,10 @@
 // please include your main Window UI components here
 (function () {
     "use strict";
-    // include Como as singleton and initialize it
-    var Como = require('/lib/Como/Core').init(),
-        // include models
-        Models = require('/lib/Como/Models'),
-        // include main window
-        MainWindow = require('/app/views/MainWindow');
+    // include components
+    var // UI instances / vars
+        win = require('/app/views/common/mainWin')(Como);
 
-    // initialize models
-    new Models(Como);
-    Como.joli.models.initialize();
-
-    new MainWindow(Como).open();
+    // open the window
+    win.open();
 }());

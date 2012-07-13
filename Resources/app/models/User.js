@@ -1,4 +1,4 @@
-module.exports = function (Como) {
+Como.Model.User = (function () {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
@@ -56,4 +56,4 @@ module.exports = function (Como) {
     };
 
     return setup();
-};
+}());

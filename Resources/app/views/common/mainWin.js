@@ -1,80 +1,76 @@
-module.exports = function (Como) {
+module.exports = function (C) {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // include Como Utility
         $ = require('/lib/Como/Utils'),
         // include UI Helper module
-        UI = require('/lib/Como/UIShortcut').init(Como),
+        UI = require('/lib/Como/UIShortcut')(C),
         // include Progress Bar UI
-        ProgressBar = require('/app/views/common/ProgressBar'),
+        pBar = require('/app/views/common/progressBar')(C),
 
-        // create a window
-        self = new UI.win($.extend(
+        // get user count
+        loggedin = C.Model.User.count() > 0,
+
+        // create a selfdow
+        self = UI.win($.extend(
             // base (common) attributes
-            Como.ui.win.common,
+            C.UI.win.common,
             // cuctom attributes
             { titleid: 'winMain', exitOnClose: true }
         )),
-        // scroll view as container
-        scrolly = new UI.scrolly({contentHeight: 'auto'}),
-        // create buttons
-        btnTest = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        scrolly = UI.scrolly({contentHeight:'auto'}),
+        // create a button
+        btnTest = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
-        loggedin = Como.joli.models.get('user').count > 0,
-        btnLogin = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnLogin = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: (loggedin ? 'btnUser' : 'btnLogin'), top: '80dp' }
         )),
-        btnChoose = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnChoose = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnChoose', top: '140dp' }
         )),
-        // create option dialog
-        optDlg = new UI.optdialog({
-            cancel: 1,
-            titleid: 'optDlgTitle',
-            options: [L('optConfirm'), L('optCancel'), L('optHelp')],
-            selectedIndex: 1,
-            destructive: 0
-        }),
-        btnAjax = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnAjax = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnAjax', top: '200dp' }
         )),
-        btnSwipe = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnSwipe = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnSwipe', top: '260dp' }
         )),
-        btnDownload = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnDownload = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnDownload', top: '320dp' }
         )),
-        btnCheckOnline = new UI.button($.extend(
-            Como.ui.buttons.badass,
+        btnCheckOnline = UI.button($.extend(
+            C.UI.buttons.badass,
             { titleid: 'btnCheckOnline', top: '380dp' }
         )),
-        progress = new ProgressBar(Como, { message: L('msgDownload') });
+        // create option dialog
+        optDlg = UI.optdialog({
+          cancel: 1,
+          titleid: 'optDlgTitle',
+          options: [L('optConfirm'), L('optCancel'), L('optHelp')],
+          selectedIndex: 1,
+          destructive: 0
+        }),
+        progress = pBar.create({
+            message: L('msgDownload')
+        });
 
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
-    btnChoose.tap(function () {
+    btnChoose.tap(function() {
         optDlg.click('Try/doChoose');
         optDlg.show();
     });
     btnAjax.tap('Try/doAjax');
     btnDownload.tap('Try/doDownload', progress);
     btnCheckOnline.tap('Try/doCheckOnline');
-
-    // listen to click event
-    btnLogin.click('Try/showLogin');
-
-    // listen to swipq event
     btnSwipe.swipe('Try/doSwipe');
-
-    // listen to taphold event
     scrolly.taphold(function (e) {
         // prevent event bubbling from children's tap event
         if (e.source === scrolly) {
@@ -85,21 +81,28 @@ module.exports = function (Como) {
         }
     });
 
-    // listen to custom event
-    scrolly.addEventListener('winTap', Como.applyAction('Try/doManual', 'x', 1, true));
+    // listen to click event
+    btnLogin.click('Try/showLogin');
 
-    // add ui to a container
+    // listen to custom event
+    scrolly.addEventListener('winTap', C.App.applyAction('Try/doManual', 'x', 1, true));
+
+    // listen to ajax download event
+    progress.addEventListener('ajax:download', function(e) {
+        var bar = e.source.children[1];
+        bar.value = e.progress;
+    });
+
+    // add button into selfdow
     scrolly.add(btnTest);
     scrolly.add(btnLogin);
     scrolly.add(btnChoose);
     scrolly.add(btnAjax);
     scrolly.add(btnSwipe);
     scrolly.add(btnDownload);
-    scrolly.add(btnCheckOnline);
     scrolly.add(progress);
-    // add container to window
+    scrolly.add(btnCheckOnline);
     self.add(scrolly);
 
-    // return this window
     return self;
 };

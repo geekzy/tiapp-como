@@ -1,11 +1,9 @@
-module.exports = function (Como) {
+Como.Controller.Try = (function () {
     "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // include Como Utility
         $ = require('/lib/Como/Utils'),
-        // include Login Window
-        LoginWindow = require('/app/views/LoginWindow'),
         // Controller methods/actions
         doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe,
         doDownload, doCheckOnline;
@@ -15,21 +13,24 @@ module.exports = function (Como) {
      * @param {Object} h a parameter passed by event handler (during listener assignment).
      * @param {Object} e an event parameter from the original component event.
      */
-    doSave = function (h) {
-        Ti.API.info('Button Height is : ' + h);
-        Ti.API.info('btn.abc : ' + this.abc);
+    doSave = function (h, e) {
+        var btn = e.source;
 
-        $.notty('OS['+ Como.device.osname +'] Version['+ Como.device.version +']');
-        $.notty('Width['+ Como.device.width +'] Height['+ Como.device.height +']');
-        $.notty((Como.device.isTablet ? 'A' : 'NOT a') + ' Tablet');
+        Ti.API.info('Button Height is : ' + h);
+        Ti.API.info('btn.abc : ' + btn.abc);
+
+        $.notty('OS['+ Como.Device.osname +'] Version['+ Como.Device.version +']');
+        $.notty('Width['+ Como.Device.width +'] Height['+ Como.Device.height +']');
+        $.notty((Como.Device.isTablet ? 'A' : 'NOT a') + ' Tablet');
     };
 
     /**
      * Show login event will create a window and a form to login.
      */
-    showLogin = function () {
-        // create Login window instance
-        var win = new LoginWindow(Como, this);
+    showLogin = function (e) {
+        var // UI instances / vars
+            btn = e.source,
+            win = require('/app/views/common/loginWin')(Como, btn);
         //  open it;
         win.open();
     };
@@ -48,7 +49,7 @@ module.exports = function (Como) {
             success: function(usr) {
                 // auth success
                 if (!usr.fail) {
-                    Como.joli.models.get('user').newRecord({
+                    Como.Model.User.newRecord({
                         id: 1, name: userTxt.value, pass: passTxt.value
                     }).save();
                     btn.setTitle(L('btnUser'));
@@ -64,7 +65,7 @@ module.exports = function (Como) {
      * User logout event handler
      */
     doLogout = function (win, btn) {
-        Como.joli.models.get('user').truncate();
+        Como.Model.User.truncate();
         btn.setTitle(L('btnLogin'));
         win.close();
     };
@@ -90,7 +91,9 @@ module.exports = function (Como) {
      * @param {Object} e an Event object related
      */
     doChoose = function (e) {
-        Ti.API.info('You selected option['+ e.index +']: '+ this.options[e.index]);
+        var src = e.source;
+        Ti.API.info(_.keys(e));
+        Ti.API.info('You selected option['+ e.index +']: '+ e.source.options[e.index]);
     };
 
     /**
@@ -157,4 +160,4 @@ module.exports = function (Como) {
            doDownload: doDownload,
         doCheckOnline: doCheckOnline
     };
-};
+}());
