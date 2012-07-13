@@ -38,8 +38,8 @@ Como - a Titanium Appcelerator MVC Framework
 - Restructure baseline code to follow CommonJS pattern.
 
 ---
-Como is *Copyright* (c) 2012 by *AppsCo.biz*
-Lead Developer: Imam <imam@xybase.com>
+Como is *Copyright* &copy; 2012 by *AppsCo.biz*
+Lead Developer: Imam &lt;imam@xybase.com&gt;
 
 ---
 Stuff our legal folk make us say:
@@ -47,7 +47,7 @@ Stuff our legal folk make us say:
 Appcelerator, Appcelerator Titanium and associated marks and logos are
 trademarks of Appcelerator, Inc.
 
-Titanium is *Copyright* (c) 2008-2012 by *Appcelerator, Inc.* All Rights Reserved.
+Titanium is *Copyright* &copy; 2008-2012 by *Appcelerator, Inc.* All Rights Reserved.
 
 Titanium is licensed under the Apache Public License (Version 2). Please
 see the LICENSE file for the full license.
