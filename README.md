@@ -10,22 +10,9 @@ Como - a Titanium Appcelerator MVC Framework
 
 ### Change Log
 
-*[25/06/12]*
+*[13/07/12]*
 
-- Initial Release of Como MVC Framework.
-
-*[26/06/12]*
-
-- Move tablet form factor to config, Remove unused image folder.
-
-*[29/06/12]*
-
-- Add Utility Module in /lib/Como/Utils.js to add HTTPClient utility.
-
-*[02/07/12]*
-
-- Fix to avoid Closure while applying action handler function.
-- Move utility Function in Como/App.js into Como/Utils.js.
+- Restructure baseline code to follow CommonJS pattern.
 
 *[03/07/12]*
 
@@ -33,9 +20,23 @@ Como - a Titanium Appcelerator MVC Framework
 - Wrap ajax download/upload callback into ondatatream/onsendstream
 - Add more UI factory on UIShortcut.js
 
-*[13/07/12]*
+*[02/07/12]*
 
-- Restructure baseline code to follow CommonJS pattern.
+- Fix to avoid Closure while applying action handler function.
+- Move utility Function in Como/App.js into Como/Utils.js.
+
+*[29/06/12]*
+
+- Add Utility Module in /lib/Como/Utils.js to add HTTPClient utility.
+
+*[26/06/12]*
+
+- Move tablet form factor to config, Remove unused image folder.
+
+*[25/06/12]*
+
+- Initial Release of Como MVC Framework.
+
 
 ---
 Como is *Copyright* &copy; 2012 by *AppsCo.biz*
