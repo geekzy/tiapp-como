@@ -8,7 +8,7 @@ module.exports = function (Como) {
             mName = m.name.toLowerCase();
 
         models[mName] = new _m(Como);
-        if (m.truncate) { models[mName].truncate(); }
+        //if (m.truncate) { models[mName].truncate(); }
     });
 
     return models;
