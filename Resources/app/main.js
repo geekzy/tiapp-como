@@ -11,7 +11,7 @@
 
     // initialize models
     new Models(Como);
-    Como.joli.models.initialize();
+    Como.db.models.initialize();
 
     new MainWindow(Como).open();
 }());

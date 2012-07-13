@@ -4,8 +4,8 @@ module.exports = function (Como, trigBtn) {
         _ = require('/lib/Underscore/underscore.min'),
         // include Como Utility
         $ = require('/lib/Como/Utils'),
-        // include UI Helper module
-        UI = require('/lib/Como/UIShortcut').init(Como),
+        // load UI Helper
+        UI = Como.loadUI(),
 
         // create a window
         self = new UI.win($.extend(
@@ -32,7 +32,7 @@ module.exports = function (Como, trigBtn) {
         // button logout title
         winLogoutTitle = _.template(L('winUser') + ' - <%=name%>'),
         // user table ref
-        User = Como.joli.models.get('user');
+        User = Como.db.models.get('user');
 
     (function () {
         var users = User.all();

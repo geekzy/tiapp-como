@@ -1,8 +1,8 @@
 module.exports = function (Como, opts) {
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
-        // include UI Helper module
-        UI = require('/lib/Como/UIShortcut').init(Como);
+        // load UI Helper
+        UI = Como.loadUI();
 
     opts = _.extend({
         width: '75%',
@@ -21,7 +21,7 @@ module.exports = function (Como, opts) {
     }, opts || {});
 
     var self, pbar, msg;
-    self = UI.view({
+    self = new UI.view({
         width: opts.width,
         height: '65dp',
         backgroundColor: opts.backgroundColor,
@@ -30,7 +30,7 @@ module.exports = function (Como, opts) {
         // hide the view initially
         visible: false
     });
-    msg = UI.label({
+    msg = new UI.label({
         text: opts.message,
         font: opts.font,
         width: '95%',
@@ -38,7 +38,7 @@ module.exports = function (Como, opts) {
         color: opts.color,
         top: '5dp'
     });
-    pbar = UI.progressbar({
+    pbar = new UI.progressbar({
         width: '95%',
         height: '50dp',
         min: opts.min,

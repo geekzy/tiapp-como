@@ -6,7 +6,7 @@ var Como = (function () {
         // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // Core methods
-        init, applyAction, loadController;
+        init, applyAction, loadController, loadUI;
 
     /**
      * Function to initialize globals
@@ -46,8 +46,9 @@ var Como = (function () {
         Como.device.locale = Ti.Platform.locale;
 
         // Create db Connection and put into Como
-        Como.joli = joliApi(joli.connect(Como.config.db));
+        Como.db = joliApi(joli.connect(Como.config.db));
 
+        Como._initted = true;
         return Como;
     };
 
@@ -87,10 +88,27 @@ var Como = (function () {
         };
     };
 
+    /**
+     * Load UI Factory
+     */
+    loadUI = function () {
+        if (!Como._initted) {
+            throw 'Como not initialized';
+        }
+
+        var UI;
+        if (!Como._ui) {
+            UI = require('/lib/Como/UIShortcut').init(Como);
+            Como._ui = UI;
+        }
+        return Como._ui;
+    };
+
     // public API
     app.init = init;
     app.loadController = loadController;
     app.applyAction = applyAction;
+    app.loadUI = loadUI;
 
     return _.extend({
         // set device namespace

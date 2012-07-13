@@ -32,7 +32,7 @@ module.exports = function (Como) {
             display: display
         };
 
-        return new Como.joli.model(m);
+        return new Como.db.model(m);
     };
 
     /**

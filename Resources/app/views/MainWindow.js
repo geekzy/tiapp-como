@@ -4,8 +4,8 @@ module.exports = function (Como) {
         _ = require('/lib/Underscore/underscore.min'),
         // include Como Utility
         $ = require('/lib/Como/Utils'),
-        // include UI Helper module
-        UI = require('/lib/Como/UIShortcut').init(Como),
+        // load UI Helper
+        UI = Como.loadUI(),
         // include Progress Bar UI
         ProgressBar = require('/app/views/common/ProgressBar'),
 
@@ -23,7 +23,7 @@ module.exports = function (Como) {
             Como.ui.buttons.badass,
             { titleid: 'btnTest', abc: 'xyz' }
         )),
-        loggedin = Como.joli.models.get('user').count > 0,
+        loggedin = Como.db.models.get('user').count() > 0,
         btnLogin = new UI.button($.extend(
             Como.ui.buttons.badass,
             { titleid: (loggedin ? 'btnUser' : 'btnLogin'), top: '80dp' }

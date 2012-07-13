@@ -48,14 +48,17 @@ module.exports = function (Como) {
             success: function(usr) {
                 // auth success
                 if (!usr.fail) {
-                    Como.joli.models.get('user').newRecord({
+                    Como.db.models.get('user').newRecord({
                         id: 1, name: userTxt.value, pass: passTxt.value
                     }).save();
                     btn.setTitle(L('btnUser'));
                     win.close();
                 }
                 // auth failed
-                else { $.notty('Incorrect Username or Password'); }
+                else {
+                    passTxt.value = '';
+                    $.notty('Incorrect Username or Password');
+                }
             }
         });
     };
@@ -64,7 +67,7 @@ module.exports = function (Como) {
      * User logout event handler
      */
     doLogout = function (win, btn) {
-        Como.joli.models.get('user').truncate();
+        Como.db.models.get('user').truncate();
         btn.setTitle(L('btnLogin'));
         win.close();
     };
