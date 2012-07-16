@@ -1,7 +1,7 @@
 Como - a Titanium Appcelerator MVC Framework
 ============================================
 
-### v2.0.0
+### v2.0.1
 
 **required:**
 
@@ -9,6 +9,12 @@ Como - a Titanium Appcelerator MVC Framework
 - underscore.js - JS Utility-Belt
 
 ### Change Log
+
+*[16/07/12]*
+
+- Add parameter on extended event assignment method to remove method before add new one
+- Move remote base URL into configuration /app/config/app.js
+- Use new backend login script
 
 *[13/07/12]*
 

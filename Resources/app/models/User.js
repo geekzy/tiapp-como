@@ -14,8 +14,10 @@ module.exports = function (Como) {
         // Table Columns
         m.columns = {
             id:     'INTEGER PRIMARY KEY',
-            name:   'TEXT',
-            pass:   'TEXT'
+            roleid: 'INTEGER',
+            nick:   'TEXT',
+            fname:  'TEXT',
+            lname:  'TEXT'
         };
 
         /**
@@ -48,8 +50,9 @@ module.exports = function (Como) {
     display = function () {
         var user = this,
             tmpl = _.template([
-                '[name => <%=name%>, ',
-                'pass => <%=pass%>, ',
+                '[nick => <%=nick%>, ',
+                'firstname => <%=fname%>, ',
+                'lastname => <%=lname%>, ',
                 'id => <%=id%>]'
             ].join(''));
         return tmpl(user);

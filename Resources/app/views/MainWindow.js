@@ -67,7 +67,7 @@ module.exports = function (Como) {
         optDlg.click(true, choose);
         optDlg.show();
     });
-    btnAjax.tap('Try/doAjax');
+    btnAjax.tap('Test/doAjax');
     btnDownload.tap('Try/doDownload', progress);
     btnCheckOnline.tap('Try/doCheckOnline');
 

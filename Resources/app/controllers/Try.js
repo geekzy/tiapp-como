@@ -7,8 +7,7 @@ module.exports = function (Como) {
         // include Login Window
         LoginWindow = require('/app/views/LoginWindow'),
         // Controller methods/actions
-        doSave, showLogin, doLogin, doLogout, doSwipe, doManual, doChoose, doAjax, doSwipe,
-        doDownload, doCheckOnline;
+        doSave, doSwipe, doManual, doChoose, doSwipe, doDownload, doCheckOnline;
 
     /**
      * Example of an action (event handler), can also accept parameters
@@ -49,24 +48,6 @@ module.exports = function (Como) {
     };
 
     /**
-     * Example of action demonstrating HttpClient request
-     */
-    doAjax = function () {
-        $.ajax({
-            url: 'http://110.74.169.145/educonnect/login.php',
-            data: {login: 'student', pass: 'student', plain: 1},
-            success: function(resp) {
-                // default dataType is json so resp is already js object
-                Ti.API.info(resp);
-                // use this ref for raw response data
-                Ti.API.info(this.responseText);
-
-                alert(resp.fname);
-            }
-        });
-    };
-
-    /**
      * Example of action demonstrating HttpClient request for Downloading
      */
     doDownload = function (pbar) {
@@ -100,11 +81,11 @@ module.exports = function (Como) {
         alert('Device is ' + (online ? 'ONLINE' : 'OFFLINE') + '.');
     }
 
+    // Public API
     return {
                doSave: doSave,
              doManual: doManual,
              doChoose: doChoose,
-               doAjax: doAjax,
               doSwipe: doSwipe,
            doDownload: doDownload,
         doCheckOnline: doCheckOnline

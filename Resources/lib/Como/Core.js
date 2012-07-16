@@ -102,6 +102,10 @@ var Como = (function () {
 
             ctrl = loadController(module);
 
+            if (!ctrl[method]) {
+                throw 'Undefined action in controller';
+            }
+
             ctrl[method].apply(e.source, _.union(args, [e]));
         };
     };

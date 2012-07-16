@@ -7,7 +7,7 @@ module.exports = function (Como) {
         // include Login Window
         LoginWindow = require('/app/views/LoginWindow'),
         // Controller methods/actions
-        showLogin, doLogin, doLogout;
+        showLogin, doLogin, doLogout, doAjax;
 
     /**
      * Show login event will create a window and a form to login.
@@ -28,13 +28,13 @@ module.exports = function (Como) {
 
         Ti.UI.Android.hideSoftKeyboard();
         $.ajax({
-            url: 'http://110.74.169.145/educonnect/login.php',
-            data: {login: userTxt.value, pass: passTxt.value, plain: 1},
+            url: Como.config.remote + 'como/login.php',
+            data: {nick: userTxt.value, pass: passTxt.value, plain: 1},
             success: function(usr) {
                 // auth success
                 if (!usr.fail) {
                     Como.db.models.get('user').newRecord({
-                        id: 1, name: userTxt.value, pass: passTxt.value
+                        id: 1, nick: usr.nick, roleid: usr.role, fname: usr.fname, lname: usr.lname
                     }).save();
                     btn.setTitle(L('btnUser'));
                     win.close();
@@ -57,9 +57,29 @@ module.exports = function (Como) {
         win.close();
     };
 
+    /**
+     * Example of action demonstrating HttpClient request
+     */
+    doAjax = function () {
+        $.ajax({
+            url: Como.config.remote + 'como/login.php',
+            data: {nick: 'admin', pass: 'como01', plain: 1},
+            success: function(resp) {
+                // default dataType is json so resp is already js object
+                Ti.API.info(resp);
+                // use this ref for raw response data
+                Ti.API.info(this.responseText);
+
+                alert(resp.lname);
+            }
+        });
+    };
+
+    // Public API
     return {
         showLogin: showLogin,
           doLogin: doLogin,
-         doLogout: doLogout
+         doLogout: doLogout,
+           doAjax: doAjax
     }
 }
