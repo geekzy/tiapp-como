@@ -27,7 +27,7 @@ module.exports = function (Como, trigBtn) {
         loginBtn = new UI.button(
             Como.ui.buttons.login,
             // Listen to tap events
-            'Try/doLogin', scrolly, self, trigBtn
+            'Test/doLogin', scrolly, self, trigBtn
         ),
         // button logout title
         winLogoutTitle = _.template(L('winUser') + ' - <%=name%>'),
@@ -59,7 +59,7 @@ module.exports = function (Como, trigBtn) {
                 { titleid: 'btnLogout', top: '20dp' }
             ),
         // Listen to tap event
-        'Try/doLogout', self, trigBtn);
+        'Test/doLogout', self, trigBtn);
         scrolly.add(loginBtn);
     }
     // add view into selfdow

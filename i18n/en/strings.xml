@@ -12,7 +12,6 @@
     <string name="btnChoose">Choose</string>
     <string name="btnUser">User</string>
     <string name="btnAjax">Ajax</string>
-    <string name="btnSwipe">Swipe Me</string>
     <string name="btnDownload">Download</string>
     <string name="btnCheckOnline">Check Online</string>
 
@@ -21,6 +20,9 @@
     <string name="optConfirm">Confirm</string>
     <string name="optCancel">Cancel</string>
     <string name="optHelp">Help</string>
+
+    <!-- Labels -->
+    <string name="lblSwipe">Swipe Me</string>
 
     <!-- Other Messages -->
     <string name="msgDownload">Downloading...</string>

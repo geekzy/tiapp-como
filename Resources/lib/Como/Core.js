@@ -61,9 +61,27 @@ var Como = (function () {
         if (!name) {
             throw 'Invalid or undefined controller name';
         }
+        // check for controller cache namespace
+        if (!Como._ctrls) { Como._ctrls = []; }
+        var Controller, ctrl, exists, pick, iter;
 
-        var Controller = require('/app/controllers/' + name);
-        return new Controller(Como);
+        iter = function (c) { return c.id === name; };
+        exists = function () { return _.some(Como._ctrls, iter); };
+        pick = function() { return _.find(Como._ctrls, iter); };
+
+        // controller already exists in cache
+        if (exists()) {
+            ctrl = pick().value;
+        // not in cache
+        } else {
+            // load it
+            Controller = require('/app/controllers/' + name);
+            ctrl = new Controller(Como);
+            // add to cache
+            Como._ctrls.push({id: name, value: ctrl});
+        }
+
+        return ctrl;
     };
 
     /**

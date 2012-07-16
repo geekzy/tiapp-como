@@ -44,10 +44,12 @@ module.exports = function (Como) {
             Como.ui.buttons.badass,
             { titleid: 'btnAjax', top: '200dp' }
         )),
-        btnSwipe = new UI.button($.extend(
-            Como.ui.buttons.badass,
-            { titleid: 'btnSwipe', top: '260dp' }
-        )),
+        lblSwipe = new UI.label({
+            textid: 'lblSwipe',
+            color: '#272e12',
+            font: { fontSize: '20dp', fontWeight: 'bold' },
+            height: '44dp', top: '260dp'
+        }),
         btnDownload = new UI.button($.extend(
             Como.ui.buttons.badass,
             { titleid: 'btnDownload', top: '320dp' }
@@ -56,12 +58,13 @@ module.exports = function (Como) {
             Como.ui.buttons.badass,
             { titleid: 'btnCheckOnline', top: '380dp' }
         )),
-        progress = new ProgressBar(Como, { message: L('msgDownload') });
+        progress = new ProgressBar(Como, { message: L('msgDownload') }),
+        choose = Como.applyAction('Try/doChoose');
 
     // listen to tap event
     btnTest.tap('Try/doSave', btnTest.getHeight());
     btnChoose.tap(function () {
-        optDlg.click('Try/doChoose');
+        optDlg.click(true, choose);
         optDlg.show();
     });
     btnAjax.tap('Try/doAjax');
@@ -69,10 +72,10 @@ module.exports = function (Como) {
     btnCheckOnline.tap('Try/doCheckOnline');
 
     // listen to click event
-    btnLogin.click('Try/showLogin');
+    btnLogin.click('Test/showLogin');
 
     // listen to swipq event
-    btnSwipe.swipe('Try/doSwipe');
+    scrolly.swipe('Try/doSwipe');
 
     // listen to taphold event
     scrolly.taphold(function (e) {
@@ -93,7 +96,7 @@ module.exports = function (Como) {
     scrolly.add(btnLogin);
     scrolly.add(btnChoose);
     scrolly.add(btnAjax);
-    scrolly.add(btnSwipe);
+    scrolly.add(lblSwipe);
     scrolly.add(btnDownload);
     scrolly.add(btnCheckOnline);
     scrolly.add(progress);

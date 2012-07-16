@@ -16,17 +16,23 @@ function UIShortcut(Como) {
                  */
                 handlerFn = function (evtName) {
                     return function () {
-                        var applyFn, inline = (typeof arguments[0]) === 'function',
+                        var remove = (typeof arguments[0]) === 'boolean',
+                            inline = (typeof arguments[remove ? 1 : 0]) === 'function',
+                            applyFn = inline ? remove ? arguments[1] : arguments[0] : function () {},
                             // convert to plain Array object
-                            args = Array.prototype.slice.call(arguments).splice(0);
+                            args = Array.prototype.slice.call(arguments).splice(remove ? 1 : 0);
 
-                        if (_.size(args) === 0) { applyFn = function () {}; }
-                        else {
+                        if (!inline) {
                             // the event handler for the specified event name
                             applyFn = Como.applyAction.apply(this, args);
                         }
+
+                        // remove first before add event listener
+                        if (remove && arguments[0]) {
+                            this.removeEventListener(evtName, applyFn);
+                        }
                         // add listener of event name with the specified handler
-                        this.addEventListener(evtName, inline ? args[0] : applyFn);
+                        this.addEventListener(evtName, applyFn);
                     };
                 },
 
