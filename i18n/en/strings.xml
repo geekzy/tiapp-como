@@ -2,28 +2,4 @@
 <resources>
     <!-- Windows -->
     <string name="winMain">Main Window</string>
-    <string name="winLogin">User Login</string>
-    <string name="winUser">User</string>
-
-    <!-- Buttons -->
-    <string name="btnTest">Tap Me!</string>
-    <string name="btnLogin">Login</string>
-    <string name="btnLogout">Logout</string>
-    <string name="btnChoose">Choose</string>
-    <string name="btnUser">User</string>
-    <string name="btnAjax">Ajax</string>
-    <string name="btnDownload">Download</string>
-    <string name="btnCheckOnline">Check Online</string>
-
-    <!-- Option Dialog -->
-    <string name="optDlgTitle">Are you sure ?</string>
-    <string name="optConfirm">Confirm</string>
-    <string name="optCancel">Cancel</string>
-    <string name="optHelp">Help</string>
-
-    <!-- Labels -->
-    <string name="lblSwipe">Swipe Me</string>
-
-    <!-- Other Messages -->
-    <string name="msgDownload">Downloading...</string>
 </resources>

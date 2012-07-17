@@ -4,7 +4,7 @@ module.exports = function (Como) {
         UI = Como.loadUI(),
         // create a window
         self = new UI.win({
-            title: 'Main Window',
+            title: L('winMain'),
             fullscreen: true,
             backgroundColor: '#fff',
             navBarHidden: false,
