@@ -1,4 +1,5 @@
 module.exports = function (Como, opts) {
+    "use strict";
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
         // load UI Helper
