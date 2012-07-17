@@ -66,7 +66,7 @@ module.exports = function(Como) {
 ```
 
 To create a Window we can use UI shortcut object factory from `Como.loadUI()` that will return the UI Shortcut factory.
-Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
+Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
 
 Change Log
 ==========
