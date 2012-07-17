@@ -212,6 +212,9 @@ var users = User.all({
 Change Log
 ==========
 
+`[17/07/12]`
+- Move complete sample usage to another project.
+
 `[16/07/12]`
 
 - Add parameter on extended event assignment method to remove method before add new one

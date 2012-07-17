@@ -7,7 +7,7 @@ module.exports = {
     db: 'tiapp-como',
 
     /** remote app **/
-    remote: 'http://110.74.169.145/',
+    remote: '#',
 
     /** sdcard location **/
     sdcard: 'file:///mnt/sdcard/',
@@ -19,7 +19,5 @@ module.exports = {
     },
 
     /** Models to load **/
-    models: [
-        {name: 'User', truncate: true}
-    ]
+    models: []
 };
