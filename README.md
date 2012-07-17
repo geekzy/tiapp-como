@@ -164,9 +164,9 @@ module.exports = {
 To create a new joli model you can use the following pattern
 
 ```js
+// app/models/User.js
 module.exports = function (Como) {
 
-    // app/models/User.js
     // define your data model
     var m = {
         /* the table name */
