@@ -4,11 +4,11 @@ module.exports = function (Como) {
         _ = require('/lib/Underscore/underscore.min');
 
     _.each(Como.config.models, function (m) {
-        var _m = require('/app/models/' + m.name),
-            mName = m.name.toLowerCase();
+        var obj = (typeof m === 'object'),
+            _m = require('/app/models/' + (obj ? m.name : m)),
+            mName = obj ? m.name.toLowerCase() : m.toLowerCase();
 
         models[mName] = new _m(Como);
-        //if (m.truncate) { models[mName].truncate(); }
     });
 
     return models;

@@ -18,12 +18,12 @@ Installation
 ------------
 
 The simplest way to start using Como is just copy `app` & `lib` directory and also `app.js` into your project,
- if you would like to use the localization feature then you also have to copy the `i18n` directory.
+if you would like to use the localization feature then you also have to copy the `i18n` directory.
 
 Directory Structure
 -------------------
 
-The directory structure of Como is as follows:
+The directory structure of common Como application is as follows:
 
     project_root
         |- i18n                 <- Localization sources
@@ -45,7 +45,7 @@ The directory structure of Como is as follows:
 Writing Views
 -------------
 
-The main view required by `main.js` is `app/views/MainWindow.js` so we will need this view as our main window.
+The main view required by `main.js` is `/app/views/MainWindow.js` so we will need this view as our main window.
 We need this MainWindow defined as CommonJS module. The directory for views is `/app/views' please create one if not exists.
 
 `app/views/MainWindow.js`
@@ -72,7 +72,7 @@ Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.L
 Writing Controllers
 -------------------
 
-To create a controller just add a `.js` in `app/controllers`. The directory for controller is `/app/controllers' please create one if not exists.
+To create a controller just add a `.js` in `/app/controllers`. The directory for controller is `/app/controllers' please create one if not exists.
 Components created using UIShortcut factory are action aware. It means that we can straight pass action expression like this:
 
 ```js
@@ -81,10 +81,10 @@ win.click('Controller/action', param1, 'param2');
 
 To define a Controller we need to use CommonJS module. We will pass Como in Contruction function and we will return the public API
 
-`app/controllers/Test.js`
 ```js
 module.exports = function (Como) {
 
+    // /app/controllers/Test.js
     var doBtnClick = function (p) {
 
         // get the source of the event
@@ -147,7 +147,7 @@ Models or Data Models are table representative in local DB, since Como is using 
 Como has a namespace for joli which is `Como.db`, it is actually a joli object.
 The directory for model is `/app/models' please create one if not exists.
 
-To configure your database name you can set it in `app/config/app.js`
+To configure your database name you can set it in `/app/config/app.js`
 
 ```js
 module.exports = {
@@ -161,10 +161,9 @@ module.exports = {
 
 To create a new joli model you can use the following pattern
 
-`app/models/User.js`
 ```js
 module.exports = function (Como) {
-
+    // app/models/User.js
     // define your data model
     var m = {
         /* the table name */
@@ -209,7 +208,7 @@ var aUser = {
 };
 
 // insert into table
-User.newRecord(aUser);
+User.newRecord(aUser).save();
 
 // select all
 var users = User.all();
@@ -226,7 +225,9 @@ Change Log
 ==========
 
 `[17/07/12]`
+
 - Move complete sample usage to another project.
+- Fix to be able to put model configs as Array of String
 
 `[16/07/12]`
 
@@ -239,7 +240,6 @@ Change Log
 - Restructure baseline code to follow CommonJS pattern.
 
 `[03/07/12]`
-
 
 - Add download file demo using custom progress bar UI.
 - Wrap ajax download/upload callback into ondatatream/onsendstream
