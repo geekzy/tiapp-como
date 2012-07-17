@@ -46,7 +46,7 @@ Writing Views
 -------------
 
 The main view required by `main.js` is `app/views/MainWindow.js` so we will need this view as our main window.
-We need this MainWindow defined as CommonJS module.
+We need this MainWindow defined as CommonJS module. The directory for views is `/app/views' please create one if not exists.
 
 `app/views/MainWindow.js`
 ```js
@@ -72,8 +72,8 @@ Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.L
 Writing Controllers
 -------------------
 
-To create a controller just add a `.js` in `app/controllers`. Components created using UIShortcut factory are action aware.
-It means that we can straight pass action expression like this:
+To create a controller just add a `.js` in `app/controllers`. The directory for controller is `/app/controllers' please create one if not exists.
+Components created using UIShortcut factory are action aware. It means that we can straight pass action expression like this:
 
 ```js
 win.click('Controller/action', param1, 'param2');
@@ -101,7 +101,7 @@ module.exports = function (Como) {
 ```
 
 We can then use the public API of our Action in Controller to act as event handler of our view.
-We can also pass parameters both via action parameters and component's custom attributes.
+We can also pass parameters both via action parameters and component custom attributes.
 
 ```js
 var btn = new UI.button({
