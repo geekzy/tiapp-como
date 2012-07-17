@@ -183,6 +183,18 @@ module.exports = function (Como) {
 };
 ```
 
+DO NOT forget to add your models to configuration `/app/config/app.js` in models Array put your model filename WITHOUT `.js`
+
+```js
+module.exports = {
+
+    /** Models to load **/
+    models: [ 'User' ],
+
+    ...
+};
+```
+
 And to use it you can do the followings:
 
 ```js
