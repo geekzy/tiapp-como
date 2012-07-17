@@ -2,7 +2,7 @@ Como - a Titanium Appcelerator MVC Framework
 ============================================
 
 Just another approach to simplify appcelerator app development,
- integrated with `joli.js` to persist data model using local DB and underscore.js as utility.
+integrated with `joli.js` to persist data model using local DB and underscore.js as utility.
 
 ### v2.0.1
 
@@ -48,10 +48,10 @@ Writing Views
 The main view required by `main.js` is `/app/views/MainWindow.js` so we will need this view as our main window.
 We need this MainWindow defined as CommonJS module. The directory for views is `/app/views' please create one if not exists.
 
-`app/views/MainWindow.js`
 ```js
 module.exports = function (Como) {
 
+    // /app/views/MainWindow.js
     var UI = Como.loadUI();
 
     var self = new UI.win({
@@ -163,6 +163,7 @@ To create a new joli model you can use the following pattern
 
 ```js
 module.exports = function (Como) {
+
     // app/models/User.js
     // define your data model
     var m = {
