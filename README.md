@@ -136,9 +136,78 @@ These events are added by UIShortcut so all components created using UIShortcut 
 And they are aware of action expression.
 
 1. `tap` the same as `touchend` in native appcelerator event.
-2. `click' the same as `click` in native appcelerator event.
+2. `click` the same as `click` in native appcelerator event.
 3. `taphod` the same as `longpress` in native appcelerator event.
 4. `swipe` the same as `swipe` in native appcelerator event.
+
+Writing Models
+--------------
+
+Models or Data Models are table representative in local DB, since Como is using joli as ORM Library,
+Como has a namespace for joli which is `Como.db`, it is actually a joli object.
+
+To configure your database name you can set it in `app/config/app.js`
+
+```js
+module.exports = {
+
+    /** db name **/
+    db: 'tiapp-como',
+
+    ...
+};
+```
+
+To create a new joli model you can use the following pattern
+
+`app/models/User.js`
+```js
+module.exports = function (Como) {
+
+    // define your data model
+    var m = {
+        /* the table name */
+        table : 'user',
+
+        /* the table columns */
+        columns : {
+            id:     'INTEGER PRIMARY KEY',
+            nick:   'TEXT',
+            name:  'TEXT'
+        }
+    };
+
+    // transform it into joli model
+    return new Como.db.model(m);
+};
+```
+
+And to use it you can do the followings:
+
+```js
+// get the model
+var User = Como.db.models.get('user');
+
+// create a record
+var aUser = {
+    id: 1,
+    nick: 'geekzy',
+    name: 'Imam Kurniawan'
+}
+
+// insert into table
+User.newRecord(aUser);
+
+// select all
+var users = User.all();
+
+// select with criteria
+var users = User.all({
+    where : {
+        'name like ?': 'Imam%'
+    }
+});
+```
 
 Change Log
 ==========
