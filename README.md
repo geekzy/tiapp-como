@@ -143,7 +143,7 @@ And they are aware of action expression.
 Writing Models
 --------------
 
-Models or Data Models are table representative in local DB, since Como is using joli as ORM Library,
+Models or Data Models are table representative in local DB, since Como is using `joli` as ORM Library,
 Como has a namespace for joli which is `Como.db`, it is actually a joli object.
 
 To configure your database name you can set it in `app/config/app.js`
@@ -193,7 +193,7 @@ var aUser = {
     id: 1,
     nick: 'geekzy',
     name: 'Imam Kurniawan'
-}
+};
 
 // insert into table
 User.newRecord(aUser);
