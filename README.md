@@ -44,8 +44,10 @@ The directory structure of Como is as follows:
 Writing Views
 -------------
 
-The main view required by main.js is MainWindow.js so we will need this view as our main window. We need this MainWindow defined as CommonJS module.
+The main view required by `main.js` is `app/views/MainWindow.js` so we will need this view as our main window.
+We need this MainWindow defined as CommonJS module.
 
+`app/views/MainWindow.js`
 ```js
 module.exports = function(Como) {
 
@@ -62,6 +64,9 @@ module.exports = function(Como) {
     return self;
 };
 ```
+
+To create a Window we can use UI shortcut object factory from `Como.loadUI()' that will return the UI Shortcut factory.
+Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.Label, etc.`. Please refer `lib/Como/UIShortcut.js'.
 
 Change Log
 ==========
