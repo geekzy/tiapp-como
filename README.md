@@ -145,6 +145,7 @@ Writing Models
 
 Models or Data Models are table representative in local DB, since Como is using `joli` as ORM Library,
 Como has a namespace for joli which is `Como.db`, it is actually a joli object.
+The directory for model is `/app/models' please create one if not exists.
 
 To configure your database name you can set it in `app/config/app.js`
 
