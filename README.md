@@ -266,8 +266,8 @@ Change Log
 - Initial Release of Como MVC Framework.
 
 ---
-Como is *Copyright* &copy; 2012 by *AppsCo.biz*
-Lead Developer: Imam &lt;imam@xybase.com&gt;
+Como is *Copyright* &copy; 2012 by *GeekZy.Net*
+Lead Developer: Imam &lt;geekzy@gmail.com&gt;
 
 ---
 Stuff our legal folk make us say:
