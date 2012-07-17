@@ -90,7 +90,7 @@ module.exports = function (Como) {
         // get the source of the event
         var source = this;
 
-        alert('It's Clicked! p is ' + p + ' & xyz is ' + source.xyz);
+        alert('It\'s Clicked! p is ' + p + ' & xyz is ' + source.xyz);
     };
 
     // Public API
