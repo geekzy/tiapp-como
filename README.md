@@ -51,9 +51,9 @@ The main view required by `main.js` is `/app/views/MainWindow.js` so we will nee
 We need this MainWindow defined as CommonJS module. The directory for views is `/app/views' please create one if not exists.
 
 ```js
+// /app/views/MainWindow.js
 module.exports = function (Como) {
 
-    // /app/views/MainWindow.js
     var UI = Como.loadUI();
 
     var self = new UI.win({
@@ -68,7 +68,7 @@ module.exports = function (Como) {
 };
 ```
 
-To create a Window we can use UI shortcut object factory from `Como.loadUI()` that will return the UI Shortcut factory.
+To create a Window we can use UIShortcut object factory from `Como.loadUI()` that will return the UIShortcut factory.
 Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
 
 Writing Controllers
@@ -84,9 +84,9 @@ win.click('Controller/action', param1, 'param2');
 To define a Controller we need to use CommonJS module. We will pass Como in Contruction function and we will return the public API
 
 ```js
+// /app/controllers/Test.js
 module.exports = function (Como) {
 
-    // /app/controllers/Test.js
     var doBtnClick = function (p) {
 
         // get the source of the event
@@ -123,7 +123,7 @@ btn.click('Test/doBtnClick', 'xxx');
 ### Use Action with my own custom events ?
 
 Yes it is possible to use action API with other events such as your own trigger custom events.
-Como has an API to get the Controller's Action using `Como.applyAction()` this function will return the actual Action function.
+Como has an API to get the Controller Action using `Como.applyAction()` this function will return the actual Action function.
 
 
 ```js
