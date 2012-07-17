@@ -135,10 +135,10 @@ btn.addEventListener('flash', handler);
 These events are added by UIShortcut so all components created using UIShortcut Factory will have these custom events.
 And they are aware of action expression.
 
-`tap` the same as `touchend` in native appcelerator event.
-`click' the same as `click` in native appcelerator event.
-`taphod` the same as `longpress` in native appcelerator event.
-`swipe` the same as `swipe` in native appcelerator event.
+1. `tap` the same as `touchend` in native appcelerator event.
+2. `click' the same as `click` in native appcelerator event.
+3. `taphod` the same as `longpress` in native appcelerator event.
+4. `swipe` the same as `swipe` in native appcelerator event.
 
 Change Log
 ==========
