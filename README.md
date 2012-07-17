@@ -20,6 +20,8 @@ Installation
 The simplest way to start using Como is just copy `app` & `lib` directory and also `app.js` into your project,
 if you would like to use the localization feature then you also have to copy the `i18n` directory.
 
+DO NOT modify `/Resources/app.js`, please modify `/Resources/app/main.js` instead to change application bootstrap.
+
 Directory Structure
 -------------------
 
