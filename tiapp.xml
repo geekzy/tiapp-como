@@ -8,13 +8,13 @@
         <target device="android">true</target>
     </deployment-targets>
     <sdk-version>2.1.0.GA</sdk-version>
-    <id>biz.appsco.mobile.ti.tiappcomo</id>
+    <id>net.geekzy.mobile.tiapp.como</id>
     <name>tiapp-como</name>
-    <version>1.0</version>
-    <publisher>AppsCo</publisher>
-    <url>http://mobile.appsco.biz/</url>
+    <version>2.0.1</version>
+    <publisher>GeekZy.Net</publisher>
+    <url>http://mobile.geekzy.net/</url>
     <description>Como is a Titanium Appscelerator MVC Framework</description>
-    <copyright>2012 by AppsCo</copyright>
+    <copyright>2012 by GeekZy.Net</copyright>
     <icon>appicon.png</icon>
     <persistent-wifi>false</persistent-wifi>
     <prerendered-icon>false</prerendered-icon>
