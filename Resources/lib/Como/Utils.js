@@ -20,13 +20,15 @@ module.exports = (function () {
                 download: emptyFn, upload: emptyFn,
                 change: emptyFn,
                 showProgress: true,
-                sync: false/*,
+                sync: false,
+                message: 'Loading...'/*,
                 progess: <the progress bar to be notified>*/
             }, o || {}),
             // default progress bar
             progressUI = Ti.UI.createActivityIndicator({
                 location: Titanium.UI.ActivityIndicator.DIALOG,
                 type: Titanium.UI.ActivityIndicator.DETERMINANT,
+                message: opt.message || '',
                 min: 0, max: 10,
                 value: 0
             });

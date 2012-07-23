@@ -4,7 +4,7 @@ Como - a Titanium Appcelerator MVC Framework
 Just another approach to simplify appcelerator app development,
 integrated with `joli.js` to persist data model using local DB and underscore.js as utility.
 
-### v2.0.1
+### v2.0.2
 
 **required:**
 
@@ -226,6 +226,11 @@ var users = User.all({
 
 Change Log
 ==========
+
+`[23/07/12]`
+
+- Add on method as shortcut for addEventListener with ability of action path aware
+- Restructure UIShortcut for readibility
 
 `[17/07/12]`
 
