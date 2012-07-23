@@ -118,11 +118,10 @@ var Como = (function () {
             throw 'Como not initialized';
         }
 
-        var UI;
         if (!Como._ui) {
-            UI = require('/lib/Como/UIShortcut').init(Como);
-            Como._ui = UI;
+            Como._ui = require('/lib/Como/UIShortcut').init(Como);
         }
+
         return Como._ui;
     };
 

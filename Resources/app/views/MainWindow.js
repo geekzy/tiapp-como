@@ -20,6 +20,7 @@ module.exports = function (Como) {
         });
 
 
+    hello.on('tap', function() { alert('Yaay!'); });
     self.add(hello);
 
     // return this window

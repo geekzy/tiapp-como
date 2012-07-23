@@ -3,6 +3,16 @@ function UIShortcut(Como) {
     if (!Como) { throw 'Como reference is undefined or null!'; }
     var // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min'),
+        // extended event name
+        events = [
+            // alias
+            {evt: 'tap', orig: 'touchend'},
+            {evt: 'taphold', orig: 'longpress'},
+
+            // non alias
+            {evt: 'click', orig: 'click'},
+            {evt: 'swipe', orig: 'swipe'}
+        ],
         /**
          * Function Titanium.UI factory wrapper
          * @param {Function} factory the factory function to create the UI
@@ -37,18 +47,39 @@ function UIShortcut(Como) {
                 },
 
                 /**
+                 * Translates event name into Titanium SDK compatible event names
+                 * @param {String} evt event name to be translated into
+                 * @return {String} event name compatible on Titanium SDK
+                 */
+                compatEventName = function (evt) {
+                    var trans = _.find(events, function (e) { return e.evt === evt; });
+                    return trans ? trans.orig : evt;
+                },
+
+                /**
+                 * Generate a reusable function as extension of addEventListener function
+                 */
+                onHandler = function () {
+                    var args = Array.prototype.slice.call(arguments).splice(1),
+                        evt = compatEventName(arguments[0]);
+
+                    handlerFn(evt).apply(this, args);
+                },
+
+                /**
                  * Shortcut based on factory creation of Titanium.UI.x
                  */
                 fn = function(opts, tapAct/*, tapArgs*/) {
                     var ui = factory(opts),
                         args = Array.prototype.slice.call(arguments).splice(1);
 
-                    ui.tap = handlerFn('touchend');
-                    ui.click = handlerFn('click');
-                    ui.taphold = handlerFn('longpress');
-                    ui.swipe = handlerFn('swipe');
-                    // more event handler shortcut here
+                    // generic handler as shortcut to addEventListener
+                    ui.on = onHandler;
 
+                    // extend with event function as event handler shortcut
+                    _.each(events, function (e) { ui[e.evt] = handlerFn(e.orig); });
+
+                    // apply inline tap events
                     if (tapAct) { ui.tap.apply(ui, args); }
 
                     return ui;
