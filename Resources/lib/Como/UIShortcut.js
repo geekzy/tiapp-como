@@ -165,18 +165,20 @@ var // include underscore utility-belt
              * @param {String} platform the platform for the factory function
              * @return {Function} the UI factory function
              */
-            buildFactory = function (tiElement, platform) {
-                var // if passed a Titanium Object
-                    TiFactory = (typeof tiElement) === 'function' ? tiElement :
+            buildFactory = function (f) {
+                // protect argument
+                if ((typeof f) === 'function') { var cfg = {}; cfg.fn = f; f = cfg; }
+                var // if already passed a Titanium UI Factory
+                    TiFactory = (typeof f.fn) === 'function' ? f.fn :
                          // build Titanium Proxy Object creation call
-                        (platform ? Ti.UI[platform]['create'+tiElement] : Ti.UI['create'+tiElement]);
+                        (f.platform ? Ti.UI[f.platform]['create'+f.fn] : Ti.UI['create'+f.fn]);
 
                 // return the Factory
                 return TiFactory;
             },
 
             /* finalize UI factory */
-            TiFactory = buildFactory(factory.fn, factory.platform || false),
+            TiFactory = buildFactory(factory),
 
             /**
              * Shortcut based on factory creation of Titanium.UI.x
@@ -201,9 +203,6 @@ var // include underscore utility-belt
         return fn;
     },
 
-    // Custom & Composite UI declare inside here
-    uiComposite = {},
-
     // constructor
     UIShortcut = function (Como) {
         "use strict";
@@ -212,7 +211,7 @@ var // include underscore utility-belt
             uiBuilder = {};
 
         _.each(uiFactories, function (f) { uiBuilder[f.name] = createUI(f, Como); });
-        return _.extend({}, uiBuilder, uiComposite);;
+        return _.extend({}, uiBuilder);
     };
 
 /**

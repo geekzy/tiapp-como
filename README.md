@@ -48,7 +48,7 @@ Writing Views
 -------------
 
 The main view required by `main.js` is `/app/views/MainWindow.js` so we will need this view as our main window.
-We need this MainWindow defined as CommonJS module. The directory for views is `/app/views' please create one if not exists.
+We need this MainWindow defined as CommonJS module. The directory for views is `/app/views` please create one if not exists.
 
 ```js
 // /app/views/MainWindow.js
@@ -74,7 +74,7 @@ Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.L
 Writing Controllers
 -------------------
 
-To create a controller just add a `.js` in `/app/controllers`. The directory for controller is `/app/controllers' please create one if not exists.
+To create a controller just add a `.js` in `/app/controllers`. The directory for controller is `/app/controllers` please create one if not exists.
 Components created using UIShortcut factory are action aware. It means that we can straight pass action expression like this:
 
 ```js
@@ -151,7 +151,7 @@ Writing Models
 
 Models or Data Models are table representative in local DB, since Como is using `joli` as ORM Library,
 Como has a namespace for joli which is `Como.db`, it is actually a joli object.
-The directory for model is `/app/models' please create one if not exists.
+The directory for model is `/app/models` please create one if not exists.
 
 To configure your database name you can set it in `/app/config/app.js`
 
