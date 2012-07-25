@@ -66,6 +66,7 @@ var // include underscore utility-belt
      * @return {Object} the Titanium.UI instance produce by factory function
      */
     createUI = function(factory, Como) {
+        "use strict";
         var /**
              * Generate a reusable function that will serve as a template of event handler
              * @param {Mixed} evtName the event name or a handler (function) itself
@@ -108,6 +109,25 @@ var // include underscore utility-belt
             },
 
             /**
+             * Add elements from an array
+             * @param {Array} tiEls elements of Ti.UI as Array
+             */
+            addAll = function (tiEls) {
+                var ui = this,
+                    // generic function to add a single element
+                    add = function(el) {
+                        ui.add(el);
+                    };
+
+                // add array
+                if (_.isArray(tiEls)) {
+                    _.each(tiEls, function (el) { add(el); });
+                }
+                // add Ti Object
+                else { add(tiEls); }
+            },
+
+            /**
              * Generate a reusable function as extension of addEventListener function
              * @return {Function} the event handler for a spesific event name
              */
@@ -130,8 +150,11 @@ var // include underscore utility-belt
                 // generic handler as shortcut to addEventListener
                 ui.on = onHandler;
 
+                // add elements from array
+                ui.addAll = addAll;
+
                 // extend with event function as event handler shortcut
-                _.each(events, function (e) { ui[e.evt] = handlerFn.apply(ui, [e.orig, Como]); });
+                _.each(events, function (e) { ui[e.evt] = handlerFn.apply(ui, [e.orig]); });
 
                 return ui;
             },
@@ -196,6 +219,7 @@ var // include underscore utility-belt
  * UIShortcut Initializer
  */
 module.exports = (function () {
+    "use strict";
     return {
         init: function (Como) { return new UIShortcut(Como); }
     };

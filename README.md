@@ -105,6 +105,9 @@ module.exports = function (Como) {
 We can then use the public API of our Action in Controller to act as event handler of our view.
 We can also pass parameters both via action parameters and component custom attributes.
 
+UI created using `UIShortcut.js` which is accessed either via `Como.loadUI()` or `require('/lib/Como/UIShortcut')`
+will have method `on(*event name*, *action/function*, *parameters*)` which is act as alias of method `addEventListener` with action aware ability.
+
 ```js
 var btn = new UI.button({
     backgroundColor: '#272e12',
@@ -117,7 +120,7 @@ var btn = new UI.button({
 });
 
 // set click to doBtnClick action which expects a String paramter
-btn.click('Test/doBtnClick', 'xxx');
+btn.on('click', 'Test/doBtnClick', 'xxx');
 ```
 
 ### Use Action with my own custom events ?
@@ -130,6 +133,7 @@ Como has an API to get the Controller Action using `Como.applyAction()` this fun
 var handler = Como.applyAction('Test/doFlash');
 
 btn.addEventListener('flash', handler);
+// or btn.on('flash', handler);
 ```
 
 ### Custom Events added by UIShortcut
@@ -227,21 +231,25 @@ var users = User.all({
 Change Log
 ==========
 
+`[15/07/12]`
+
+- Provide addAll method to all UI created with UIShortcut module to add array of child elements into parent elements.
+
 `[23/07/12]`
 
-- Add on method as shortcut for addEventListener with ability of action path aware
-- Restructure UIShortcut for readibility
+- Add on method as shortcut for addEventListener with ability of action path aware.
+- Restructure UIShortcut for readibility.
 
 `[17/07/12]`
 
 - Move complete sample usage to another project.
-- Fix to be able to put model configs as Array of String
+- Fix to be able to put model configs as Array of String.
 
 `[16/07/12]`
 
-- Add parameter on extended event assignment method to remove method before add new one
-- Move remote base URL into configuration /app/config/app.js
-- Use new backend login script
+- Add parameter on extended event assignment method to remove method before add new one.
+- Move remote base URL into configuration `/app/config/app.js`.
+- Use new backend login script.
 
 `[13/07/12]`
 
@@ -250,28 +258,28 @@ Change Log
 `[03/07/12]`
 
 - Add download file demo using custom progress bar UI.
-- Wrap ajax download/upload callback into ondatatream/onsendstream
-- Add more UI factory on UIShortcut.js
+- Wrap ajax download/upload callback into ondatatream/onsendstream.
+- Add more UI factory on `UIShortcut.js`.
 
 `[02/07/12]`
 
 - Fix to avoid Closure while applying action handler function.
-- Move utility Function in Como/App.js into Como/Utils.js.
+- Move utility Function in `Como/App.js` into `Como/Utils.js`.
 
 `[29/06/12]`
 
-- Add Utility Module in /lib/Como/Utils.js to add HTTPClient utility.
+- Add Utility Module in `/lib/Como/Utils.js` to add `HTTPClient` utility.
 
 `[26/06/12]`
 
-- Move tablet form factor to config, Remove unused image folder.
+- Move tablet form factor to config and Remove unused image folder.
 
 `[25/06/12]`
 
 - Initial Release of Como MVC Framework.
 
 ---
-Como is *Copyright* &copy; 2012 by *GeekZy.Net*
+Como is *Copyright* &copy; 2012 by *GeekZy.Net* -
 Lead Developer: Imam &lt;geekzy@gmail.com&gt;
 
 ---
