@@ -71,6 +71,47 @@ module.exports = function (Como) {
 To create a Window we can use UIShortcut object factory from `Como.loadUI()` that will return the UIShortcut factory.
 Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
 
+### Create a custom UI Definition as extension to UIShortcut.js
+
+To be able to put your UI definition inside of the UI Factory object coming from `Como.loadUI()` you can create a config file in
+CommonJS module pattern in `/app/config/UIConfig.js` and it will be automatically included upon `Como.loadUI()` invocation.
+
+The skeleton of the config is as follows:
+
+```js
+// /app/config/UIConfig.js
+var myUIFactory = function (opt) {
+    // UI Creation here and return the UI object
+};
+
+// all your factories definition
+var factories = [
+    {
+        // the name of the factory method
+        // make sure no conflicts with existing ones
+        name: 'myui',
+
+        // the factory function
+        fn: myUIFactory, // if you put in 'String' Como will try to execute Ti.UI.createString
+
+        // callback before the factory executed; this reference will be user's options
+        before: function () {
+            // do before ui creation activity such as modifying user's options
+        },
+
+        // callback after the factory executed; this reference will be the ui object
+        after: function () {
+            // do after ui creation activity such as add child elements
+        }
+    }
+];
+
+// export it as factories attribute of the module
+exports.factories = factories;
+```
+
+And next time you execute `var UI = Como.loadUI();` you'll be able to access `var customUI = new UI.myui(opts);`.
+
 Writing Controllers
 -------------------
 
@@ -231,7 +272,11 @@ var users = User.all({
 Change Log
 ==========
 
-`[15/07/12]`
+`[26/07/12]`
+
+- Move UI Factories config out of UIShortcut.js into UIConfig.js and provide user defined extension to it.
+
+`[25/07/12]`
 
 - Provide addAll method to all UI created with UIShortcut module to add array of child elements into parent elements.
 

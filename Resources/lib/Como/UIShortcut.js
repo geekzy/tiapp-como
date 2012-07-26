@@ -1,64 +1,14 @@
 var // include underscore utility-belt
     _ = require('/lib/Underscore/underscore.min'),
 
+    // include UI Factories and Events Config
+    uiConfig = require('/lib/Como/UIConfig'),
+
     // Basic UIShortcut public API definition
-    uiFactories = [
-        /* Shortcut for Titanium.UI.View creation using Ti.UI.createView as factory */
-        {name: 'view',              fn: 'View'/*, platform: 'iPhone'*/},
-
-        /* Shortcut for Titanium.UI.ScrollView creation using Ti.UI.createScrollView as factory */
-        {name: 'scrolly',           fn: 'ScrollView'},
-
-        /* Shortcut for Titanium.UI.Label creation using Ti.UI.createLabel as factory */
-        {name: 'label',             fn: 'Label'},
-
-        /* Shortcut for Titanium.UI.TextField creation using Ti.UI.createTextField as factory */
-        {name: 'textfield',         fn: 'TextField'},
-
-        /* Shortcut for Titanium.UI.TextArea creation using Ti.UI.createTextArea as factory */
-        {name: 'textarea',          fn: 'TextArea'},
-
-        /* Shortcut for Titanium.UI.ImageView creation using Ti.UI.createImageView as factory */
-        {name: 'image',             fn: 'ImageView'},
-
-        /* Shortcut for Titanium.UI.Window creation using Ti.UI.createWindow as factory */
-        {name: 'win',               fn: 'Window'},
-
-        /* Shortcut for Titanium.UI.Button creation using Ti.UI.createButton as factory */
-        {name: 'button',            fn: 'Button'},
-
-        /* Shortcut for Titanium.UI.Picker creation using Ti.UI.createPicker as factory */
-        {name: 'picker',            fn: 'Picker'},
-
-        /* Shortcut for Titanium.UI.ActivityIndicator creation using Ti.UI.createActivityIndicator as factory */
-        {name: 'indicator',         fn: 'ActivityIndicator'},
-
-        /* Shortcut for Titanium.UI.OptionDialog creation using Ti.UI.createOptionDialog as factory */
-        {name: 'optdialog',         fn: 'OptionDialog'},
-
-        /* Shortcut for Titanium.UI.TableView creation using Ti.UI.createTableView as factory */
-        {name: 'tableview',         fn: 'TableView'},
-
-        /* Shortcut for Titanium.UI.TableViewRow creation using Ti.UI.createTableViewRow as factory */
-        {name: 'tablerow',          fn: 'TableViewRow'},
-
-        /* Shortcut for Titanium.UI.TableViewSection creation using Ti.UI.createTableViewSection as factory */
-        {name: 'tablesection',      fn: 'TableViewSection'},
-
-        /* Shortcut for Titanium.UI.ProgressBar creation using Ti.UI.createProgressBar as factory */
-        {name: 'progressbar',       fn: 'ProgressBar'}
-    ],
+    uiFactories = uiConfig.factories,
 
     // event aliases
-    events = [
-        // alias
-        {evt: 'tap', orig: 'touchend'},
-        {evt: 'taphold', orig: 'longpress'},
-
-        // non alias
-        {evt: 'click', orig: 'click'},
-        {evt: 'swipe', orig: 'swipe'}
-    ],
+    events = uiConfig.events,
 
     /**
      * Function Titanium.UI factory wrapper
@@ -185,6 +135,9 @@ var // include underscore utility-belt
              * @return {Object} the UI Object
              */
             fn = function(opts, tapAct/*, tapArgs*/) {
+                // call before callback
+                if (factory.before) { factory.before.apply(opts, arguments); }
+
                 var // create it
                     ui = TiFactory(opts),
                     // grab the rest of the arguments
@@ -194,6 +147,9 @@ var // include underscore utility-belt
                 ui = extendUI.apply(ui, args);
                 // apply inline tap events
                 if (tapAct) { ui.tap.apply(ui, args); }
+
+                // call after callback
+                if (factory.after) { factory.after.apply(ui, arguments); }
 
                 // return the UI object
                 return ui
