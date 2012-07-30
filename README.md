@@ -71,6 +71,15 @@ module.exports = function (Como) {
 To create a Window we can use UIShortcut object factory from `Como.loadUI()` that will return the UIShortcut factory.
 Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
 
+### Using Localization/Internationalization
+
+To be able to localize messages we need to define the messages for each language inside `/i18n` directory under the `project root`.
+Inside this folder, you will have folders for each of the supported languages in your application,
+named according to the [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1) standard. For example, `en` for English, is the default.
+Each language contains a single XML Formatted file called `string.xml` which contains all the messages in that language.
+
+*please refer [Internationalization Guide](http://docs.appcelerator.com/titanium/2.1/index.html#!/guide/Internationalization)*
+
 ### Create a custom UI Definition as extension to UIShortcut.js
 
 To be able to put your UI definition inside of the UI Factory object coming from `Como.loadUI()` you can create a config file in
