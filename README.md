@@ -82,6 +82,7 @@ The skeleton of the config is as follows:
 // /app/config/UIConfig.js
 var myUIFactory = function (opt) {
     // UI Creation here and return the UI object
+    // You CANNOT use Como.loadUI(); you have to use the native Titanium API to create UI.
 };
 
 // all your factories definition
@@ -119,10 +120,10 @@ To create a controller just add a `.js` in `/app/controllers`. The directory for
 Components created using UIShortcut factory are action aware. It means that we can straight pass action expression like this:
 
 ```js
-win.click('Controller/action', param1, 'param2');
+win.on('click', 'Controller/action', param1, 'param2');
 ```
 
-To define a Controller we need to use CommonJS module. We will pass Como in Contruction function and we will return the public API
+To define a Controller we need to use CommonJS module. We will pass Como in Constructor function and we will return the public API
 
 ```js
 // /app/controllers/Test.js
@@ -149,6 +150,8 @@ We can also pass parameters both via action parameters and component custom attr
 UI created using `UIShortcut.js` which is accessed either via `Como.loadUI()` or `require('/lib/Como/UIShortcut')`
 will have method `on(*event name*, *action/function*, *parameters*)` which is act as alias of method `addEventListener` with action aware ability.
 
+*So you won't likely need to use `addEventListener` anymore, unless to listen event as Application Level Events (using `Ti.App.addEventListener`).*
+
 ```js
 var btn = new UI.button({
     backgroundColor: '#272e12',
@@ -166,15 +169,15 @@ btn.on('click', 'Test/doBtnClick', 'xxx');
 
 ### Use Action with my own custom events ?
 
-Yes it is possible to use action API with other events such as your own trigger custom events.
+Yes it is possible to use action API with custom events such as your own trigger custom events.
 Como has an API to get the Controller Action using `Como.applyAction()` this function will return the actual Action function.
 
 
 ```js
-var handler = Como.applyAction('Test/doFlash');
+var handler = Como.applyAction('Test/doFlash', 'params');
 
-btn.addEventListener('flash', handler);
-// or btn.on('flash', handler);
+btn.on('flash', handler);
+// or btn.on('flash', 'Test/doFlash', 'params');
 ```
 
 ### Custom Events added by UIShortcut
@@ -185,13 +188,13 @@ And they are aware of action expression.
 1. `tap` the same as `touchend` in native appcelerator event.
 2. `click` the same as `click` in native appcelerator event.
 3. `taphod` the same as `longpress` in native appcelerator event.
-4. `swipe` the same as `swipe` in native appcelerator event.
+*more to come in the future*
 
 Writing Models
 --------------
 
-Models or Data Models are table representative in local DB, since Como is using `joli` as ORM Library,
-Como has a namespace for joli which is `Como.db`, it is actually a joli object.
+Models or Data Models are table representatives in local DB, since Como is using `joli` as ORM Library,
+Como has a namespace for joli which is `Como.db`, it is a joli object.
 The directory for model is `/app/models` please create one if not exists.
 
 To configure your database name you can set it in `/app/config/app.js`
@@ -230,7 +233,7 @@ module.exports = function (Como) {
 };
 ```
 
-DO NOT forget to add your models to configuration `/app/config/app.js` in models Array put your model filename WITHOUT `.js`
+DO NOT forget to add your models to configuration `/app/config/app.js` in models property, put your model filename WITHOUT `.js` in the Array.
 
 ```js
 module.exports = {
@@ -245,17 +248,17 @@ module.exports = {
 And to use it you can do the followings:
 
 ```js
-// get the model
+// get the model, notice the parameter used is the table name of the Model.
 var User = Como.db.models.get('user');
 
-// create a record
+// setup a record
 var aUser = {
     id: 1,
     nick: 'geekzy',
     name: 'Imam Kurniawan'
 };
 
-// insert into table
+// create the record and insert into table
 User.newRecord(aUser).save();
 
 // select all
