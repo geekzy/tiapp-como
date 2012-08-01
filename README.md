@@ -8,8 +8,8 @@ integrated with `joli.js` to persist data model using local DB and underscore.js
 
 **required:**
 
-- joli.js - Local DB ORM
-- underscore.js - JS Utility-Belt
+- [joli.js](https://github.com/xavierlacot/joli.js) - Local DB ORM
+- [underscore.js](https://github.com/documentcloud/underscore) - JS Utility-Belt
 
 Getting Started
 ===============
@@ -21,6 +21,8 @@ The simplest way to start using Como is just copy `app` & `lib` directory and al
 if you would like to use the localization feature then you also have to copy the `i18n` directory.
 
 DO NOT modify `/Resources/app.js`, please modify `/Resources/app/main.js` instead to change application bootstrap.
+
+Please check the [demo project](https://github.com/geekzy/tiapp-como-demo) for a sample como project.
 
 Directory Structure
 -------------------
@@ -195,8 +197,7 @@ These events are added by UIShortcut so all components created using UIShortcut 
 And they are aware of action expression.
 
 1. `tap` the same as `touchend` in native appcelerator event.
-2. `click` the same as `click` in native appcelerator event.
-3. `taphod` the same as `longpress` in native appcelerator event.
+2. `taphod` the same as `longpress` in native appcelerator event.
 *more to come in the future*
 
 Writing Models
