@@ -4,6 +4,8 @@ Como - a Titanium Appcelerator MVC Framework
 Just another approach to simplify appcelerator app development,
 integrated with `joli.js` to persist data model using local DB and underscore.js as utility.
 
+Please check the [demo project](https://github.com/geekzy/tiapp-como-demo) for a sample como project.
+
 ### v2.0.2
 
 **required:**
@@ -21,8 +23,6 @@ The simplest way to start using Como is just copy `app` & `lib` directory and al
 if you would like to use the localization feature then you also have to copy the `i18n` directory.
 
 DO NOT modify `/Resources/app.js`, please modify `/Resources/app/main.js` instead to change application bootstrap.
-
-Please check the [demo project](https://github.com/geekzy/tiapp-como-demo) for a sample como project.
 
 Directory Structure
 -------------------
