@@ -2,7 +2,7 @@ Como - a Titanium Appcelerator MVC Framework
 ============================================
 
 Just another approach to simplify appcelerator app development,
-integrated with `joli.js` to persist data model using local DB and underscore.js as utility.
+integrated with `joli.js` to persist data model using local DB and `underscore.js` as utility.
 
 Please check the [demo project](https://github.com/geekzy/tiapp-como-demo) for a sample como project.
 
