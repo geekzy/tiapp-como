@@ -7,10 +7,10 @@
         <target device="blackberry">false</target>
         <target device="android">true</target>
     </deployment-targets>
-    <sdk-version>2.1.0.GA</sdk-version>
+    <sdk-version>2.1.1.GA</sdk-version>
     <id>net.geekzy.mobile.tiapp.como</id>
     <name>tiapp-como</name>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <publisher>GeekZy.Net</publisher>
     <url>http://mobile.geekzy.net/</url>
     <description>Como is a Titanium Appscelerator MVC Framework</description>
