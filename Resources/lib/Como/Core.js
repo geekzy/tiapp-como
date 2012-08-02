@@ -25,6 +25,22 @@ var Como = (function () {
         loadDimension = function() {
             Como.device.height = Ti.Platform.displayCaps.platformHeight;
             Como.device.width = Ti.Platform.displayCaps.platformWidth;
+
+            // Device is considered a tablet
+            Como.device.isTablet = Como.device.ipad;
+            // decide what is considered to be a tablet form factor for android
+            if (Como.device.android) {
+                // portrait tablet
+                if (Ti.Gesture.portrait) {
+                    Como.device.isTablet = Como.device.width > Como.config.tablet.width
+                        || Como.device.height > Como.config.tablet.height;
+                }
+                // lanscape tablet
+                else {
+                    Como.device.isTablet = Como.device.height > Como.config.tablet.width
+                        || Como.device.width > Como.config.tablet.height;
+                }
+            }
         };
 
         // Put configs and UI properties into Como
@@ -43,12 +59,6 @@ var Como = (function () {
         loadDimension();
         // listen to orientation change
         Ti.Gesture.addEventListener('orientationchange', function() { loadDimension(); });
-
-        // Device is considered a tablet
-        Como.device.isTablet = Como.device.ipad ||
-            // decide what is considered to be a tablet form factor for android
-            (Como.device.android && (Como.device.width > Como.config.tablet.width
-                || Como.device.height > Como.config.tablet.height));
 
         // Device Current Locale
         Como.device.locale = Ti.Platform.locale;

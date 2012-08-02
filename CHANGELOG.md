@@ -3,7 +3,8 @@ Change Log
 
 `[02/08/2012]`
 
-- Recapture device's width and height in Como.device upon device change orientation.
+- Recapture device width and height in Como.device upon device change orientation.
+- Recalculate tablet definition when orientation change.
 - Throw error when loading Models but no definition in config.
 
 `[26/07/12]`
