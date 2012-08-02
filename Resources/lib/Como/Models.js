@@ -3,6 +3,10 @@ module.exports = function (Como) {
         // include underscore utility-belt
         _ = require('/lib/Underscore/underscore.min');
 
+    if (!Como.config.models) {
+        throw 'No models configuration exists!';
+    }
+
     _.each(Como.config.models, function (m) {
         var obj = (typeof m === 'object'),
             _m = require('/app/models/' + (obj ? m.name : m)),

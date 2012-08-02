@@ -12,13 +12,20 @@ var Como = (function () {
      * Function to initialize globals
      */
     init = function() {
-        var // load configurations
+        var loadDimension,
+            // load configurations
             config = require('/app/config/app'),
             // include and load UI properties configuration
             uiProps = require('/app/config/ui'),
             // include joli ORM
             joli = require('/lib/Joli/joli'),
             joliApi = require('/lib/Joli/joli.api');
+
+        // load latest dimension into Como.device
+        loadDimension = function() {
+            Como.device.height = Ti.Platform.displayCaps.platformHeight;
+            Como.device.width = Ti.Platform.displayCaps.platformWidth;
+        };
 
         // Put configs and UI properties into Como
         Como.ui = uiProps;
@@ -33,8 +40,9 @@ var Como = (function () {
         Como.device.android = Como.device.osname === 'android';
 
         // Device dimension
-        Como.device.height = Ti.Platform.displayCaps.platformHeight;
-        Como.device.width = Ti.Platform.displayCaps.platformWidth;
+        loadDimension();
+        // listen to orientation change
+        Ti.Gesture.addEventListener('orientationchange', function() { loadDimension(); });
 
         // Device is considered a tablet
         Como.device.isTablet = Como.device.ipad ||
