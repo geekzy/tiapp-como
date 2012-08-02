@@ -194,11 +194,10 @@ btn.on('flash', handler);
 ### Custom Events added by UIShortcut
 
 These events are added by UIShortcut so all components created using UIShortcut Factory will have these custom events.
-UI methods with the same name as these custom event name as event listener shortcut is also available.
+Also available UI methods with the same name as these custom event name.
 
 1. `tap` the same as `touchend` in native appcelerator event.
 2. `taphod` the same as `longpress` in native appcelerator event.
-*more to come in the future*
 
 You can listen to above events with the following syntax:
 
