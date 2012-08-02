@@ -37,7 +37,7 @@ The directory structure of common Como application is as follows:
             |   |- controllers  <- Controller sources
             |   |- models       <- Model sources
             |   |- views        <- View sources
-            |   |- main.js      <- Application bootstrap
+            |   |- main.js      <- Como bootstrap
             |
             |- lib
             |   |- Como         <- Core Como Library
@@ -53,7 +53,7 @@ The main view required by `main.js` is `/app/views/MainWindow.js` so we will nee
 We need this MainWindow defined as CommonJS module. The directory for views is `/app/views` please create one if not exists.
 
 ```js
-// /app/views/MainWindow.js
+// file: /app/views/MainWindow.js
 module.exports = function (Como) {
 
     var UI = Como.loadUI();
@@ -90,7 +90,7 @@ CommonJS module pattern in `/app/config/UIConfig.js` and it will be automaticall
 The skeleton of the config is as follows:
 
 ```js
-// /app/config/UIConfig.js
+// file: /app/config/UIConfig.js
 var myUIFactory = function (opt) {
     // UI Creation here and return the UI object
     // You CANNOT use Como.loadUI(); you have to use the native Titanium API to create UI.
@@ -137,7 +137,7 @@ win.on('click', 'Controller/action', param1, 'param2');
 To define a Controller we need to use CommonJS module. We will pass Como in Constructor function and we will return the public API
 
 ```js
-// /app/controllers/Test.js
+// file: /app/controllers/Test.js
 module.exports = function (Como) {
 
     var doBtnClick = function (p) {
@@ -194,11 +194,23 @@ btn.on('flash', handler);
 ### Custom Events added by UIShortcut
 
 These events are added by UIShortcut so all components created using UIShortcut Factory will have these custom events.
-And they are aware of action expression.
+UI methods with the same name as these custom event name as event listener shortcut is also available.
 
 1. `tap` the same as `touchend` in native appcelerator event.
 2. `taphod` the same as `longpress` in native appcelerator event.
 *more to come in the future*
+
+You can listen to above events with the following syntax:
+
+```js
+var btn = new UI.button({ ... });
+
+// inline function
+btn.tap(function(e) { ... });
+
+// or use action path
+btn.taphold('Controller/action', 'params');
+```
 
 Writing Models
 --------------
@@ -222,7 +234,7 @@ module.exports = {
 To create a new joli model you can use the following pattern
 
 ```js
-// app/models/User.js
+// file: /app/models/User.js
 module.exports = function (Como) {
 
     // define your data model
@@ -234,7 +246,25 @@ module.exports = function (Como) {
         columns : {
             id:     'INTEGER PRIMARY KEY',
             nick:   'TEXT',
-            name:  'TEXT'
+            name:   'TEXT'
+        },
+
+        /* declare Table based method(s) here */
+        methods: {
+            info: function() {
+                Ti.API.info('Table name is: ' + this.table);
+            }
+            /* more methods here */
+        },
+
+        /* declare Record based method(s) here */
+        objectMethods: {
+            details: function() {
+                Ti.API.info('record id is: ' + this.id);
+                Ti.API.info('record nick is: ' + this.nick);
+                Ti.API.info('record name is: ' + this.name);
+            }
+            /* more methods here */
         }
     };
 
@@ -258,7 +288,7 @@ module.exports = {
 And to use it you can do the followings:
 
 ```js
-// get the model, notice the parameter used is the table name of the Model.
+// get the model, notice the parameter used is the TABLE NAME of the Model.
 var User = Como.db.models.get('user');
 
 // setup a record
@@ -280,6 +310,20 @@ var users = User.all({
         'name like ?': 'Imam%'
     }
 });
+
+// fetch by primary key
+var user = User.findOneById(1);
+
+// invoke table methods
+User.info();
+// output: Table name is: user
+
+// invoke record methods
+user.details();
+// output:
+//   record id is: 1
+//   record nick is: geekzy
+//   record name is: Imam Kurniawan
 ```
 
 Change Log
