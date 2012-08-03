@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+`[03/08/2012]`
+
+- Update Utils.js to add deep object extend function
+
 `[02/08/2012]`
 
 - Recapture device width and height in Como.device upon device change orientation.
