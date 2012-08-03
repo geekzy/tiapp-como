@@ -6,3 +6,5 @@ tmp
 .fastdev.lock
 build/
 build.log
+.settings/
+.svn/
