@@ -4,14 +4,14 @@ Como - a Titanium Appcelerator MVC Framework
 Just another approach to simplify [Titanium Appcelerator](http://www.appcelerator.com/platform/titanium-sdk) app development,
 integrated with `joli.js` to persist data model using local DB and `underscore.js` as utility.
 
-Please check the [demo project](https://github.com/geekzy/tiapp-como-demo) for a sample como project.
+Please check the [demo project](http://github.com/geekzy/tiapp-como-demo) for a sample como project.
 
 ### v2.0.3
 
 **required:**
 
-- [joli.js](https://github.com/xavierlacot/joli.js) - Local DB ORM
-- [underscore.js](https://github.com/documentcloud/underscore) - JS Utility-Belt
+- [joli.js](http://github.com/xavierlacot/joli.js) - Local DB ORM
+- [underscore.js](http://github.com/documentcloud/underscore) - JS Utility-Belt
 
 Getting Started
 ===============
@@ -70,7 +70,7 @@ module.exports = function (Como) {
 };
 ```
 
-To create a Window we can use UIShortcut object factory from `Como.loadUI()` that will return the UIShortcut factory.
+To create a Window we can use UIShortcut object factory from `Como.loadUI()` that will return the `UIShortcut` factory.
 Other components also available such as `Ti.UI.ScrollView, Ti.UI.Button, Ti.UI.Label, etc.`. Please refer `lib/Como/UIShortcut.js`.
 
 ### Using Localization/Internationalization
@@ -161,7 +161,7 @@ We can also pass parameters both via action parameters and component custom attr
 UI created using `UIShortcut.js` which is accessed either via `Como.loadUI()` or `require('/lib/Como/UIShortcut')`
 will have method `on(*event name*, *action/function*, *parameters*)` which is act as alias of method `addEventListener` with action aware ability.
 
-*So you won't likely need to use `addEventListener` anymore, unless to listen event as Application Level Events (using `Ti.App.addEventListener`).*
+*So you won't likely need to use `addEventListener` anymore, unless to listen to Application Level Events (using `Ti.App.addEventListener`).*
 
 ```js
 var btn = new UI.button({
