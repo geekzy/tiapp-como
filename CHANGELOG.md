@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+`[15/08/2012]`
+
+- Fix bug when ajax with `dataType: 'plain'` not to parse as JSON object.
+
 `[03/08/2012]`
 
 - Update Utils.js to add deep object extend function

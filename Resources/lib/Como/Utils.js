@@ -48,7 +48,7 @@ module.exports = (function () {
                 }
             }
 
-            resp = opt.dataType === 'json' ? JSON.parse(resp) : resp
+            resp = opt.dataType === 'json' ? JSON.parse(resp) : resp;
             // call user's callback
             opt.success.apply(this, [resp, status]);
         };
@@ -68,7 +68,7 @@ module.exports = (function () {
                 }
             }
 
-            resp = opt.dataType === 'json' ? JSON.parse(resp) : resp
+            resp = opt.dataType === 'json' ? JSON.parse(resp) : resp;
             // call user's callback
             opt.failure.apply(this, [resp, status]);
         };
